@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace chessnet.lib
+namespace chessnet.lib.model
 {
     public class BishopPiece : Piece
     {

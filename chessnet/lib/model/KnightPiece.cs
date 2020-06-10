@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace chessnet.lib
+namespace chessnet.lib.model
 {
     public class KnightPiece : Piece
     {
