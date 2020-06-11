@@ -10,8 +10,10 @@ namespace chessnet.lib.model
         public string icon { get; set; }
         public colour colour { get; set; }
         public bool hasMoved { get; set; }
+        public int row { get; set; }
+        public int file { get; set; }
 
-        public PawnPiece(int nameVal, colour colourVal)
+        public PawnPiece(int nameVal, colour colourVal, int row, int file)
         {
             id = nameVal;
 
@@ -19,8 +21,16 @@ namespace chessnet.lib.model
 
             colour = colourVal;
 
+            setPosition(row, file);
+
             hasMoved = false;
-          
+
+        }
+
+        public void setPosition(int rowValue, int fileValue)
+        {
+            row = rowValue;
+            file = fileValue;
         }
 
     }

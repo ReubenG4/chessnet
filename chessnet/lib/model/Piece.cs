@@ -13,7 +13,10 @@ namespace chessnet.lib.model
     {
         int id { get; set; }
         string icon { get; set; }
-
         colour colour { get; set; }
+        int row { get; set; }
+        int file { get; set;  }
+
+        public void setPosition(int rowValue, int fileValue);
     }
 }
