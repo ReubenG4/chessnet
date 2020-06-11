@@ -6,7 +6,7 @@ namespace chessnet.lib.model
 {
     class MoveListFactory
     {
-        public List<Move> createBishopMoveSet()
+        public List<Move> createBishopMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -29,7 +29,7 @@ namespace chessnet.lib.model
             return moveset;
         }
 
-        public List<Move> createKingMoveSet()
+        public List<Move> createKingMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -68,7 +68,7 @@ namespace chessnet.lib.model
             return moveset;
         }
 
-        public List<Move> createKnightMoveSet()
+        public List<Move> createKnightMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -116,7 +116,7 @@ namespace chessnet.lib.model
 
         }
 
-        public List<Move> createPawnMoveSet()
+        public List<Move> createPawnMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -131,7 +131,7 @@ namespace chessnet.lib.model
             return moveset;
         }
 
-        public List<Move> createQueenMoveSet()
+        public List<Move> createQueenMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -170,7 +170,7 @@ namespace chessnet.lib.model
             return moveset;
         }
 
-        public List<Move> createRookMoveSet()
+        public List<Move> createRookMoveList()
         {
             List<Move> moveset = new List<Move>();
 

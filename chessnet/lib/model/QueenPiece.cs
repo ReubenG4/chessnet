@@ -8,27 +8,26 @@ namespace chessnet.lib.model
     {
         public int id{ get; set; }
         public string icon { get; set; }
-        public colour colour { get; set; }
-        public int row { get; set; }
-        public int file { get; set; }
+        public Colour colour { get; set; }
+        public Tuple<int, int> position { get; set; }
 
-        public QueenPiece(int nameVal, colour colourVal, int row, int file)
+        public QueenPiece(int idVal, Colour colourVal, int rowVal, int fileVal)
         {
-            id = nameVal;
+            id = idVal;
 
             icon = "placeholder";
 
             colour = colourVal;
 
-            setPosition(row, file);
+            setPosition(rowVal, fileVal);
 
         }
 
         public void setPosition(int rowValue, int fileValue)
         {
-            row = rowValue;
-            file = fileValue;
+            position = Tuple.Create(rowValue, fileValue);
         }
+
 
     }
 }

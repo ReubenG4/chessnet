@@ -8,20 +8,19 @@ namespace chessnet.lib.model
     {
         public int id { get; set; }
         public string icon { get; set; }
-        public colour colour { get; set; }
+        public Colour colour { get; set; }
         public bool hasMoved { get; set; }
-        public int row { get; set; }
-        public int file { get; set; }
+        public Tuple<int, int> position { get; set; }
 
-        public PawnPiece(int nameVal, colour colourVal, int row, int file)
+        public PawnPiece(int idVal, Colour colourVal, int rowVal, int fileVal)
         {
-            id = nameVal;
+            id = idVal;
 
             icon = "placeholder";
 
             colour = colourVal;
 
-            setPosition(row, file);
+            position = Tuple.Create(rowVal, fileVal);
 
             hasMoved = false;
 
@@ -29,9 +28,10 @@ namespace chessnet.lib.model
 
         public void setPosition(int rowValue, int fileValue)
         {
-            row = rowValue;
-            file = fileValue;
+            position = Tuple.Create(rowValue, fileValue);
+            hasMoved = true;
         }
+
 
     }
 }

@@ -7,34 +7,34 @@ namespace chessnet.lib.model
     class PieceFactory
     {
        
-        public BishopPiece CreateBishop(int nameVal)
+        public BishopPiece CreateBishop(int idVal, Colour colourVal, int row, int file)
         {
-            return new BishopPiece(nameVal);
+            return new BishopPiece(idVal, colourVal, row, file);
         }
 
-        public KingPiece CreateKing(int nameVal)
+        public KingPiece CreateKing(int idVal, Colour colourVal, int row, int file)
         {
-            return new KingPiece(nameVal);
+            return new KingPiece(idVal, colourVal, row, file);
         }
 
-        public KnightPiece CreateKnight(int nameVal)
+        public KnightPiece CreateKnight(int idVal, Colour colourVal, int row, int file)
         {
-            return new KnightPiece(nameVal);
+            return new KnightPiece(idVal, colourVal, row, file);
         }
 
-        public PawnPiece CreatePawn(int nameVal)
+        public PawnPiece CreatePawn(int idVal, Colour colourVal, int row, int file)
         {
-            return new PawnPiece(nameVal);
+            return new PawnPiece(idVal, colourVal, row, file);
         }
 
-        public QueenPiece CreateQueen(int nameVal)
+        public QueenPiece CreateQueen(int idVal, Colour colourVal, int row, int file)
         {
-            return new QueenPiece(nameVal);
+            return new QueenPiece(idVal, colourVal, row, file);
         }
 
-        public RookPiece CreateRook(int nameVal)
+        public RookPiece CreateRook(int idVal, Colour colourVal, int row, int file)
         {
-            return new RookPiece(nameVal);
+            return new RookPiece(idVal, colourVal, row, file);
         }
     }
 }
