@@ -8,24 +8,18 @@ namespace chessnet.lib.model
     {
         public int id { get; set; }
         public string icon { get; set; }
-        public List<Move> moveset { get; set; }
+        public colour colour { get; set; }
+        public bool hasMoved { get; set; }
 
-        public PawnPiece(int nameVal)
+        public PawnPiece(int nameVal, colour colourVal)
         {
             id = nameVal;
 
             icon = "placeholder";
 
-            moveset = new List<Move>();
+            colour = colourVal;
 
-            var northMove = new Move(false, false, 1);
-            northMove.AddStep(Direction.North, 1);
-            moveset.Add(northMove);
-
-            var northFirstMove = new Move(false, false, 1);
-            northFirstMove.AddStep(Direction.North, 2);
-            moveset.Add(northFirstMove);
-
+            hasMoved = false;
           
         }
 
