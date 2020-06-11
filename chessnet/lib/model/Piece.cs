@@ -5,7 +5,7 @@ namespace chessnet.lib.model
 {
     public interface Piece
     {
-        string name { get; set; }
+        int id { get; set; }
         string icon { get; set; }
 
         List<Move> moveset { get; set; }

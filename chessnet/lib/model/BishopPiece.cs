@@ -6,13 +6,13 @@ namespace chessnet.lib.model
 {
     public class BishopPiece : Piece
     {
-        public string name { get; set; }
+        public int id { get; set; }
         public string icon { get; set; }
         public List<Move> moveset { get; set; }
 
-        public BishopPiece()
+        public BishopPiece(int nameVal)
         {
-            name = "Bishop";
+            id = nameVal;
 
             icon = "placeholder";
 

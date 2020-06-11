@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
-
+using System.Collections.Specialized;
 
 namespace chessnet.lib.model
 {
     public class KnightPiece : Piece
     {
 
-        public string name { get; set; }
+        public int id { get; set; }
         public string icon { get; set; }
 
         public List<Move> moveset { get; set; }
 
-        public KnightPiece()
+        public KnightPiece(int nameVal)
         {
-            name = "Knight";
+            id = nameVal;
 
             icon = "placeholder";
 
