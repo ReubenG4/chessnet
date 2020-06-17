@@ -4,7 +4,16 @@ using System.Text;
 
 namespace chessnet.lib.model
 {
-    class PieceColourException : Exception
+
+    class PieceException : Exception
+    {
+        public PieceException(string message)
+        {
+
+        }
+    }
+
+    class PieceColourException : PieceException
     {
         public PieceColourException(string message) : base(message)
         {
@@ -12,7 +21,7 @@ namespace chessnet.lib.model
         }
     }
 
-    class PiecePositionException : Exception
+    class PiecePositionException : PieceException
     {
         public PiecePositionException(string message) : base(message)
         {
@@ -20,7 +29,7 @@ namespace chessnet.lib.model
         }
     }
 
-    class PieceNotFoundException : Exception
+    class PieceNotFoundException : PieceException
     {
         public PieceNotFoundException(string message) : base(message)
         {
