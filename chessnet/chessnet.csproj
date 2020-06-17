@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="lib\controller\" />
-    <Folder Include="lib\view\" />
   </ItemGroup>
 
 </Project>

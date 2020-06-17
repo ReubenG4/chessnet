@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:chessnet"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!--Button: An empty square, mouseover shows selection and changes colour -->
+        <ResourceDictionary Source="./lib/view/BoardResourceDictionary.xaml" />
+
+
+
+
     </Application.Resources>
 </Application>
