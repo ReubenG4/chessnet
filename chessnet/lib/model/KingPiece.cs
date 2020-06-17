@@ -11,7 +11,7 @@ namespace chessnet.lib.model
         public Colour colour { get; set; }
         public Tuple<int, int> position { get; set; }
 
-        public KingPiece(int idVal, Colour colourVal, int rowVal, int fileVal)
+        public KingPiece(int idVal, Colour colourVal, int fileVal, int rowVal)
         {
             id = idVal;
 
@@ -19,15 +19,19 @@ namespace chessnet.lib.model
 
             colour = colourVal;
 
-            setPosition(rowVal, fileVal);
+            setPosition(fileVal, rowVal);
 
         }
 
-        public void setPosition(int rowValue, int fileValue)
+        public void setPosition(int fileValue, int rowValue)
         {
-            position = Tuple.Create(rowValue, fileValue);
+            position = Tuple.Create(fileValue, rowValue);
         }
 
+        public void setPosition(Tuple<int, int> newPosValue)
+        {
+            position = newPosValue;
+        }
 
     }
 }
