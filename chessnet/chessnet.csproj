@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Stateless" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Views\ChessBoard.xaml">
       <SubType>Designer</SubType>
     </Page>

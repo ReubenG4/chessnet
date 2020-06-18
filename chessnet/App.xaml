@@ -2,10 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:chessnet"
-             StartupUri="MainWindow.xaml">
+             Startup="Application_Startup">
     <Application.Resources>
-        <!--Button: An empty square, mouseover shows selection and changes colour -->
-        <ResourceDictionary Source="BoardResourceDictionary.xaml" />
+        <!-- Resources For ChessBoard-->
+        <ResourceDictionary Source="./Resources/Views/BoardResourceDictionary.xaml" />
 
 
 

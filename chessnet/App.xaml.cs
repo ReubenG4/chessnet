@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Stateless;
 
 namespace chessnet
 {
@@ -13,5 +14,12 @@ namespace chessnet
     /// </summary>
     public partial class App : Application
     {
-    }
+		private void Application_Startup(object sender, StartupEventArgs e)
+		{
+			// Create the startup window
+			StartSplashWindow startWnd = new StartSplashWindow();
+			// Show the window
+			startWnd.Show();
+		}
+	}
 }
