@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!--Button: An empty square, mouseover shows selection and changes colour -->
-        <ResourceDictionary Source="./lib/view/BoardResourceDictionary.xaml" />
+        <ResourceDictionary Source="BoardResourceDictionary.xaml" />
 
 
 
