@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace chessnet
 {
     /// <summary>
-    /// Interaction logic for ChessBoard.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class ChessBoard : Window
     {
