@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
     public enum Colour
     {
@@ -10,30 +10,33 @@ namespace chessnet.lib.model
     }
 
     //Enumerated type to convert value of file position to a representative character
-    public enum FileValToChar
+    public enum File
     {
-        a = 1,
-        b = 2,
-        c = 3,
-        d = 4,
-        e = 5,
-        f = 6,
-        g = 7,
-        h = 9
+        A = 1,
+        B = 2,
+        C = 3,
+        D = 4,
+        E = 5,
+        F = 6,
+        G = 7,
+        H = 8
     }
 
     public interface Piece
     {   
-        //id number for a piece
-        int id { get; set; }
         //Placeholder variable to describe icon
         string icon { get; set; }
         //Colour of the piece
         Colour colour { get; set; }
         //Current position of piece
-        Tuple<int, int> position { get; set; }
+        int file { get; set; }
+        int row { get; set; }
+        string position { get; set; }
+
+
         //Set current position of piece
-        public void setPosition(int fileValue, int rowValue);
-        public void setPosition(Tuple<int, int> posValue);
+        public void setPosition(File fileValue, int rowValue);
+      
+        
     }
 }

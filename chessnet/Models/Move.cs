@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
     public enum Direction
     {

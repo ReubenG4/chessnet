@@ -20,13 +20,13 @@ namespace chessnet
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class ChessBoardView : Window
-    {
+    {      
+
         public ChessBoardView()
         {
             InitializeComponent();
             DataContext = new ChessBoardViewModel(this);
         }
-
-
+        
     }
 }

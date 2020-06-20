@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
     class MoveListFactory
     {
@@ -116,7 +116,7 @@ namespace chessnet.lib.model
 
         }
 
-        public List<Move> createPawnMoveList()
+        public List<Move> createWhitePawnMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -126,6 +126,21 @@ namespace chessnet.lib.model
 
             Move northFirstMove = new Move(false, false, 1);
             northFirstMove.AddStep(Direction.North, 2);
+            moveset.Add(northFirstMove);
+
+            return moveset;
+        }
+
+        public List<Move> createBlackPawnMoveList()
+        {
+            List<Move> moveset = new List<Move>();
+
+            Move northMove = new Move(false, false, 1);
+            northMove.AddStep(Direction.South, 1);
+            moveset.Add(northMove);
+
+            Move northFirstMove = new Move(false, false, 1);
+            northFirstMove.AddStep(Direction.South, 2);
             moveset.Add(northFirstMove);
 
             return moveset;

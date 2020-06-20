@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
 
     class PieceException : Exception

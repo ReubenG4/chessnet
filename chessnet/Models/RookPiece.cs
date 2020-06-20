@@ -2,35 +2,36 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
     public class RookPiece : Piece
     {
-        public int id { get; set; }
         public string icon { get; set; }
         public Colour colour { get; set; }
-        public Tuple<int, int> position { get; set; }
+        public int file { get; set; }
+        public int row { get; set; }
+        public string position { get; set; }
 
-        public RookPiece(int idVal, Colour colourVal, int fileVal, int rowVal)
+        public RookPiece(Colour colourVal, File fileVal, int rowVal)
         {
-            id = idVal;
 
             icon = "placeholder";
 
             colour = colourVal;
 
+            file = (int)fileVal;
+
+            row = rowVal;
+
             setPosition(fileVal, rowVal);
 
         }
-
-        public void setPosition(int fileValue, int rowValue)
+        public void setPosition(File fileValue, int rowValue)
         {
-            position = Tuple.Create(fileValue, rowValue);
-        }
+            file = (int)fileValue;
+            row = rowValue;
 
-        public void setPosition(Tuple<int, int> newPosValue)
-        {
-            position = newPosValue;
+            position = $"{(int)fileValue}{rowValue}";
         }
     }
 }

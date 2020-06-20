@@ -1,5 +1,4 @@
-﻿using chessnet.lib.model;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using Stateless;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,8 @@ namespace Chessnet.ViewModels.StateMachines
 {
     public enum BoardState
     {
+       Startup,
+
        WhiteTurnStart,
        WhitePieceHeld,
        WhiteTurnEnd,
@@ -25,6 +26,8 @@ namespace Chessnet.ViewModels.StateMachines
 
     public enum BoardTrigger
     {
+        Initialise,
+
         WhitePiecePicked,
         WhitePieceDropped,
         WhitePieceMoved,
@@ -44,11 +47,15 @@ namespace Chessnet.ViewModels.StateMachines
     public class ChessBoardMachine : Stateless.StateMachine<BoardState,BoardTrigger>
     {
        
-        public ChessBoardMachine(Dictionary<string, Action> actions) : base(BoardState.WhiteTurnStart)
+        public ChessBoardMachine(Dictionary<string, Action> actions) : base(BoardState.Startup)
         {
+
             /* States for white turn */
+            this.Configure(BoardState.Startup)
+                .OnEntry(actions["startup"])
+                .Permit(BoardTrigger.Initialise, BoardState.WhiteTurnStart);
+
             this.Configure(BoardState.WhiteTurnStart)
-                .OnEntry(actions["renderWhite"])
                 .Permit(BoardTrigger.WhitePiecePicked, BoardState.WhitePieceHeld);
 
             this.Configure(BoardState.WhitePieceHeld)
@@ -60,7 +67,7 @@ namespace Chessnet.ViewModels.StateMachines
                 .Permit(BoardTrigger.WhiteNoWin, BoardState.BlackTurnStart);
 
             this.Configure(BoardState.WhiteVictory)
-                .Permit(BoardTrigger.GameReset, BoardState.WhiteTurnStart);
+                .Permit(BoardTrigger.GameReset, BoardState.Startup);
 
             /* States for black turn */
             this.Configure(BoardState.BlackTurnStart)
@@ -75,7 +82,7 @@ namespace Chessnet.ViewModels.StateMachines
                 .Permit(BoardTrigger.BlackNoWin, BoardState.WhiteTurnStart);
 
             this.Configure(BoardState.BlackVictory)
-               .Permit(BoardTrigger.GameReset, BoardState.WhiteTurnStart);
+               .Permit(BoardTrigger.GameReset, BoardState.Startup);
 
         }
 

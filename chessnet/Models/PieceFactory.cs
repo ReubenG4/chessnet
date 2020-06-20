@@ -2,39 +2,39 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace chessnet.lib.model
+namespace Chessnet.Models
 {
-    class PieceFactory
+    public class PieceFactory
     {
        
-        public BishopPiece CreateBishop(int idVal, Colour colourVal, int row, int file)
+        public BishopPiece CreateBishop(Colour colourVal,  File file, int row)
         {
-            return new BishopPiece(idVal, colourVal, row, file);
+            return new BishopPiece(colourVal, file, row);
         }
 
-        public KingPiece CreateKing(int idVal, Colour colourVal, int row, int file)
+        public KingPiece CreateKing(Colour colourVal, File file, int row)
         {
-            return new KingPiece(idVal, colourVal, row, file);
+            return new KingPiece(colourVal, file, row);
         }
 
-        public KnightPiece CreateKnight(int idVal, Colour colourVal, int row, int file)
+        public KnightPiece CreateKnight(Colour colourVal, File file, int row)
         {
-            return new KnightPiece(idVal, colourVal, row, file);
+            return new KnightPiece(colourVal, file, row);
         }
 
-        public PawnPiece CreatePawn(int idVal, Colour colourVal, int row, int file)
+        public PawnPiece CreatePawn(Colour colourVal, File file, int row)
         {
-            return new PawnPiece(idVal, colourVal, row, file);
+            return new PawnPiece(colourVal, file, row);
         }
 
-        public QueenPiece CreateQueen(int idVal, Colour colourVal, int row, int file)
+        public QueenPiece CreateQueen(Colour colourVal, File file, int row)
         {
-            return new QueenPiece(idVal, colourVal, row, file);
+            return new QueenPiece(colourVal, file, row);
         }
 
-        public RookPiece CreateRook(int idVal, Colour colourVal, int row, int file)
+        public RookPiece CreateRook(Colour colourVal, File file, int row)
         {
-            return new RookPiece(idVal, colourVal, row, file);
+            return new RookPiece(colourVal, file, row);
         }
     }
 }
