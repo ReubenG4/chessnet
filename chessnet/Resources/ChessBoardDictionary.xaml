@@ -196,17 +196,17 @@
     </Style>
 
     <Style x:Key="DefaultBlackPawn" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
-        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="Content" Value="&#9823;"/>
     </Style>
 
     <Style x:Key="ValidBlackPawn" TargetType= "Button" BasedOn="{StaticResource ValidSquare}">
-        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="Content" Value="&#9823;"/>
     </Style>
 
     <Style x:Key="InvalidBlackPawn" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
-        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="Content" Value="&#9823;"/>
     </Style>
 

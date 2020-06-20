@@ -31,12 +31,13 @@ namespace Chessnet.Models
         //Current position of piece
         int file { get; set; }
         int row { get; set; }
-        string position { get; set; }
-
 
         //Set current position of piece
+        public void setPosition(int fileValue, int rowValue);
         public void setPosition(File fileValue, int rowValue);
-      
+        public void setPosition(Tuple<int, int> posVal);
+        public (int, int) getPosition();
+        
         
     }
 }

@@ -26,7 +26,6 @@ namespace Chessnet.ViewModels.StateMachines
 
     public enum BoardTrigger
     {
-        Initialise,
 
         WhitePiecePicked,
         WhitePieceDropped,
@@ -52,8 +51,8 @@ namespace Chessnet.ViewModels.StateMachines
 
             /* States for white turn */
             this.Configure(BoardState.Startup)
-                .OnEntry(actions["startup"])
-                .Permit(BoardTrigger.Initialise, BoardState.WhiteTurnStart);
+                .OnEntry(actions["GameReset"])
+                .Permit(BoardTrigger.GameReset, BoardState.WhiteTurnStart);
 
             this.Configure(BoardState.WhiteTurnStart)
                 .Permit(BoardTrigger.WhitePiecePicked, BoardState.WhitePieceHeld);

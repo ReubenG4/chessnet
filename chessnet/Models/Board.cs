@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stateless.Graph;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,23 +7,30 @@ namespace Chessnet.Models
 {
     class Board
     {
+        private Tuple<int, int> position;
+
         /* List Of Pieces */
         List<Piece> blackPieces { get; set; }
         List<Piece> whitePieces { get; set; }
 
         /* Dictionary for O(n) access if state of board is known*/
-        public Dictionary<string, Piece> chessList { get; private set; }
+        public Dictionary<(int, int), Piece> chessList { get; private set; }
 
         public Board()
         {
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
-            chessList = new Dictionary<string, Piece>();
+            chessList = new Dictionary<(int,int) , Piece>();
         }
 
-        public void init()
+        public void reset()
         {
+            blackPieces = new List<Piece>();
+            whitePieces = new List<Piece>();
+
+            chessList = new Dictionary<(int,int), Piece>();
+
             PieceFactory piecefactory = new PieceFactory();
 
             /*Create White Pieces */
@@ -44,6 +52,25 @@ namespace Chessnet.Models
             addPiece(piecefactory.CreateKnight(Colour.White, File.G, 1));
             addPiece(piecefactory.CreateRook(Colour.White, File.H, 1));
 
+            /*Create Black Pieces */
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.A, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.B, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.C, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.D, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.E, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.F, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.G, 7));
+            addPiece(piecefactory.CreatePawn(Colour.Black, File.H, 7));
+
+            addPiece(piecefactory.CreateRook(Colour.Black, File.A, 8));
+            addPiece(piecefactory.CreateKnight(Colour.Black, File.B, 8));
+            addPiece(piecefactory.CreateBishop(Colour.Black, File.C, 8));
+            addPiece(piecefactory.CreateKing(Colour.Black, File.D, 8));
+            addPiece(piecefactory.CreateQueen(Colour.Black, File.E, 8));
+            addPiece(piecefactory.CreateBishop(Colour.Black, File.F, 8));
+            addPiece(piecefactory.CreateKnight(Colour.Black, File.G, 8));
+            addPiece(piecefactory.CreateRook(Colour.Black, File.H, 8));
+
         }
 
 
@@ -57,17 +84,15 @@ namespace Chessnet.Models
             //Retrieve position and colour
             File file = (File)pieceToAdd.file;
             int row = pieceToAdd.row;
-            string position = pieceToAdd.position;
+            (int,int) position = pieceToAdd.getPosition();
             Colour colour = pieceToAdd.colour;
 
             //Check if position is valid
-            if (position == null)
-                throw (new PiecePositionException("pieceToAdd has no set position, invalid"));
-            else if (row < 1 || row > 8 || file < File.A || file > File.H)
+            if (row < 1 || row > 8 || file < File.A || file > File.H)
                 throw (new PiecePositionException("pieceToAdd has out-of-bounds position, invalid"));
 
             //Check if position is empty
-            if (chessList.ContainsKey(pieceToAdd.position))
+            if (chessList.ContainsKey(position))
                 throw (new PieceNotFoundException("pieceToAdd is being added to an occupied position, invalid"));
 
             //Check if colour is valid and add it to the proper list
@@ -79,7 +104,7 @@ namespace Chessnet.Models
                 throw (new PieceColourException("Invalid colour for pieceToAdd"));
 
             //Add it to dictionary of chess pieces in play
-            chessList.Add(pieceToAdd.position, pieceToAdd);
+            chessList.Add(position, pieceToAdd);
         }
 
       
