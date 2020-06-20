@@ -1,4 +1,5 @@
-﻿using System;
+﻿using chessnet.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,17 @@ using System.Windows.Shapes;
 namespace chessnet
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StartSplashView.xaml
     /// </summary>
-    public partial class StartSplashWindow : Window
+    public partial class StartSplashView : Window
     {
-        public StartSplashWindow()
+        
+        public StartSplashView()
         {
             InitializeComponent();
+            DataContext = new StartSplashViewModel(this);
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-        }
+       
     }
 }

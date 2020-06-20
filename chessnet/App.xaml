@@ -5,7 +5,7 @@
              Startup="Application_Startup">
     <Application.Resources>
         <!-- Resources For ChessBoard-->
-        <ResourceDictionary Source="./Resources/Views/BoardResourceDictionary.xaml" />
+        <ResourceDictionary Source="./Resources/ChessBoardDictionary.xaml" />
 
 
 

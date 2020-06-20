@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chessnet.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,14 @@ namespace chessnet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class ChessBoard : Window
+    public partial class ChessBoardView : Window
     {
-        public ChessBoard()
+        public ChessBoardView()
         {
             InitializeComponent();
+            DataContext = new ChessBoardViewModel(this);
         }
+
+
     }
 }
