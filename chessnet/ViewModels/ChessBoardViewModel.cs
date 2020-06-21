@@ -1,18 +1,18 @@
 ﻿using chessnet;
 using Chessnet.Models;
+using Chessnet.ViewModels.Commands.StateMachines;
 using Chessnet.ViewModels.StateMachines;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 
 namespace Chessnet.ViewModels
 {
 
     public class ChessBoardViewModel 
     {
-
+        #region declarations
         /* Declare View and State Machine */
         ChessBoardMachine machine;
         ChessBoardView _view;
@@ -22,19 +22,18 @@ namespace Chessnet.ViewModels
 
         /* Declare dictionary to lookup button reference for a position */
         private Dictionary<(int,int), Button> buttonDictionary;
-       
+
+        /*Commands*/
+        public ICommand whitePieceChosenCommand { get; private set; }
+
         /* Constructor */
         public ChessBoardViewModel(ChessBoardView view)
         {
             //Initialise view
             _view = view;
 
-            //Dictionary of actions for machine to access
-            Dictionary<string, Action> actions = new Dictionary<string, Action>();
-            actions.Add("GameReset", gameResetAction);
-
             //Initialise StateMachine
-            machine = new ChessBoardMachine(actions);
+            machine = new ChessBoardMachine(this);
 
             //Initialise Board model
             board = new Board();
@@ -42,12 +41,18 @@ namespace Chessnet.ViewModels
             //Initialise Button Dictionary
             initButtonDictionary();
 
-            //Initialise the board
+            //Initialise commands for state machine
+            whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
+
+
+            //Initialise the game
             gameResetAction();
 
         }
+        #endregion declarations
 
-        /*Actions invoked by state machine*/
+        /*Actions: Methods directly invoked by state machine*/
+        #region Actions
 
         /*gameResetAction: Resets game*/
         public void gameResetAction()
@@ -62,17 +67,42 @@ namespace Chessnet.ViewModels
             machine.Fire(BoardTrigger.GameReset);
         }
 
+        /*whiteTurnStartAction: Places game in WhiteTurnStart state */
+        public void whiteTurnStartAction()
+        {
+          
+            /* Iterate through each whitePiece */
+            foreach(var pieceToChange in board.whitePieces)
+            {
+                //Retrieve the appropiate style
+                Style validStyle = getValidPieceStyle(pieceToChange);
+
+                //Locate the button
+                Button buttonToChange = buttonDictionary[pieceToChange.getPosition()];
+
+                //Change its style
+                buttonToChange.Style = validStyle;
+
+                //Change its command
+                buttonToChange.Command = whitePieceChosenCommand;
+            }
+        }
+        #endregion Actions
+
+        /*Methods not directly invoked by State machine*/
+
+        #region NotActions
         /* Renders every square of the Board model*/
         public void renderBoard()
         {
             /*Iterate through each button*/
             foreach(var square in buttonDictionary){
 
-                /* Retrieve each button and its position */
+                //Retrieve each button and its position
                 (int,int) position = square.Key;
                 Button buttonToChange = square.Value;
                 
-                /* If position is occupied */
+                //If position is occupied 
                 if(board.chessList.TryGetValue(position, out _))
                 {
                     //Retrieve piece
@@ -87,7 +117,6 @@ namespace Chessnet.ViewModels
                     buttonToChange.Style = Application.Current.Resources["DefaultSquare"] as Style;
                 }
             }
-
         }
 
         public Style getDefaultPieceStyle(Piece pieceToRender)
@@ -136,10 +165,112 @@ namespace Chessnet.ViewModels
                     else if (pieceToRender.colour == Colour.Black)
                         return Application.Current.Resources["DefaultBlackRook"] as Style;
                     break;
-            }           
-            return null;
+            }
+            throw new PieceStyleException("Default Piece Button Style not found");
         }
 
+        public Style getValidPieceStyle(Piece pieceToRender)
+        {
+            //Find Default Button Style for the piece
+            switch (pieceToRender)
+            {
+                case BishopPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhiteBishop"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackBishop"] as Style;
+                    break;
+
+                case KingPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhiteKing"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackKing"] as Style;
+                    break;
+
+                case KnightPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhiteKnight"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackKnight"] as Style;
+                    break;
+
+                case PawnPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhitePawn"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackPawn"] as Style;
+                    break;
+
+                case QueenPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhiteQueen"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackQueen"] as Style;
+                    break;
+
+                case RookPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["ValidWhiteRook"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["ValidBlackRook"] as Style;
+                    break;
+            }
+            throw new PieceStyleException("ValidPiece Button Style not found");
+        }
+
+        public Style getInvalidPieceStyle(Piece pieceToRender)
+        {
+            //Find Default Button Style for the piece
+            switch (pieceToRender)
+            {
+                case BishopPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhiteBishop"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackBishop"] as Style;
+                    break;
+
+                case KingPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhiteKing"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackKing"] as Style;
+                    break;
+
+                case KnightPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhiteKnight"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackKnight"] as Style;
+                    break;
+
+                case PawnPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhitePawn"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackPawn"] as Style;
+                    break;
+
+                case QueenPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhiteQueen"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackQueen"] as Style;
+                    break;
+
+                case RookPiece p:
+                    if (pieceToRender.colour == Colour.White)
+                        return Application.Current.Resources["InvalidWhiteRook"] as Style;
+                    else if (pieceToRender.colour == Colour.Black)
+                        return Application.Current.Resources["InvalidBlackRook"] as Style;
+                    break;
+            }
+            throw new PieceStyleException("Invalid Piece Button Style not found");
+        }
+        #endregion NotActions
+
+        #region Others
         public void initButtonDictionary()
         {
             buttonDictionary = new Dictionary<(int,int), Button>();
@@ -215,10 +346,8 @@ namespace Chessnet.ViewModels
             buttonDictionary.Add((6, 8), _view.F8);
             buttonDictionary.Add((7, 8), _view.G8);
             buttonDictionary.Add((8, 8), _view.H8);
-
-
         }
 
-       
+        #endregion Others
     }
 }

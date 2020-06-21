@@ -1,8 +1,6 @@
-﻿using GalaSoft.MvvmLight.Command;
-using Stateless;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Chessnet.ViewModels.StateMachines
@@ -45,16 +43,18 @@ namespace Chessnet.ViewModels.StateMachines
 
     public class ChessBoardMachine : Stateless.StateMachine<BoardState,BoardTrigger>
     {
-       
-        public ChessBoardMachine(Dictionary<string, Action> actions) : base(BoardState.Startup)
+        public event PropertyChangedEventHandler PropertyChanged;
+        public ChessBoardMachine(ChessBoardViewModel viewModel) : base(BoardState.Startup)
         {
+             
 
             /* States for white turn */
             this.Configure(BoardState.Startup)
-                .OnEntry(actions["GameReset"])
+                .OnEntry(viewModel.gameResetAction)
                 .Permit(BoardTrigger.GameReset, BoardState.WhiteTurnStart);
 
             this.Configure(BoardState.WhiteTurnStart)
+                .OnEntry(viewModel.whiteTurnStartAction)
                 .Permit(BoardTrigger.WhitePiecePicked, BoardState.WhitePieceHeld);
 
             this.Configure(BoardState.WhitePieceHeld)
@@ -83,8 +83,31 @@ namespace Chessnet.ViewModels.StateMachines
             this.Configure(BoardState.BlackVictory)
                .Permit(BoardTrigger.GameReset, BoardState.Startup);
 
+            OnTransitioned((t) =>
+            {
+                OnPropertyChanged("State");
+                CommandManager.InvalidateRequerySuggested();
+            });
+
+            //used to debug commands and UI components
+            OnTransitioned
+              (
+                (t) => Debug.WriteLine
+                  (
+                    "State Machine transitioned from {0} -> {1} [{2}]",
+                    t.Source, t.Destination, t.Trigger
+                  )
+              );
         }
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+       
        
 
     }

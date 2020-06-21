@@ -21,6 +21,14 @@ namespace Chessnet.Models
         }
     }
 
+    class PieceStyleException : PieceException
+    {
+        public PieceStyleException(string message) : base(message)
+        {
+
+        }
+    }
+
     class PiecePositionException : PieceException
     {
         public PiecePositionException(string message) : base(message)

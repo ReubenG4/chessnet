@@ -1,4 +1,4 @@
-﻿namespace Chessnet.ViewModels
+﻿namespace Chessnet.Views
 {
     public enum ButtonStyle
     {

@@ -10,8 +10,8 @@ namespace Chessnet.Models
         private Tuple<int, int> position;
 
         /* List Of Pieces */
-        List<Piece> blackPieces { get; set; }
-        List<Piece> whitePieces { get; set; }
+        public List<Piece> blackPieces { get; set; }
+        public List<Piece> whitePieces { get; set; }
 
         /* Dictionary for O(n) access if state of board is known*/
         public Dictionary<(int, int), Piece> chessList { get; private set; }
