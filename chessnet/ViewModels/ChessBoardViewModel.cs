@@ -1,33 +1,26 @@
-﻿using chessnet;
-using Chessnet.Models;
-using Chessnet.ViewModels.Commands.StateMachines;
+﻿using Chessnet.Models;
 using Chessnet.ViewModels.StateMachines;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections;
+using System.Resources;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Chessnet.ViewModels
 {
-    public class ChessBoardViewModel
+    public class ChessBoardViewModel : BindableObject
     {
         #region declarations
         /* Declare View and State Machine */
         ChessBoardMachine machine;
 
         /* Declare board model*/
-        Board board;
-
-        /* Declare dictionary to lookup style reference for a button */
-        public Dictionary<(int,int), Style> buttonStyleDictionary;
-
-        /*Declare dictionary to lookup Command reference for a button*/
-        public Dictionary<(int, int), ICommand> buttonCommandDictionary;
+        public Board board {get; private set;}
 
         /*Commands*/
         public ICommand whitePieceChosenCommand { get; private set; }
+        #endregion declarations
 
+        #region constructors
         /* Constructor */
         public ChessBoardViewModel()
         {
@@ -37,12 +30,6 @@ namespace Chessnet.ViewModels
             //Initialise Board model
             board = new Board();
 
-            //Initialise ButtonStyles 
-            initButtonStyleDictionary();
-
-            //Initialise Commands
-            initButtonCommandDictionary();
-
             //Initialise commands for state machine
             whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
 
@@ -50,9 +37,7 @@ namespace Chessnet.ViewModels
             gameResetAction();
 
         }
-
-        
-        #endregion declarations
+        #endregion constructors
 
         /*Actions: Methods directly invoked by state machine*/
         #region Actions
@@ -63,65 +48,78 @@ namespace Chessnet.ViewModels
             //Initialise board model
             board.reset();
 
-            //Render the board
-            renderBoard();
+            //Render the default board
+            renderDefaultBoard();
 
-            //Place FSM in next state
-            //machine.Fire(BoardTrigger.GameReset);
+            //Place state machine in next state
+            machine.Fire(BoardTrigger.GameReset);
         }
 
         /*whiteTurnStartAction: Places game in WhiteTurnStart state */
         public void whiteTurnStartAction()
         {
-          
             /* Iterate through each whitePiece */
             foreach(var pieceToChange in board.whitePieces)
             {
                 //Retrieve the appropiate style
                 Style validStyle = getValidPieceStyle(pieceToChange);
+                (int, int) position = pieceToChange.getPosition();
 
                 //Retrieve the reference to the position's button style
-                Style styleToChange = buttonStyleDictionary[pieceToChange.getPosition()];
-
-                //Change its style
-                styleToChange = validStyle;
+                board.styles[board.toCollectionKey(position)] = validStyle;
+                board.commands[board.toCollectionKey(position)] = whitePieceChosenCommand;
             }
         }
         #endregion Actions
 
         /*Methods not directly invoked by State machine*/
-
         #region NotActions
+
         /* Renders every square of the Board model*/
-        public void renderBoard()
+        public void renderDefaultBoard()
         {
-            /*Iterate through each button*/
-            foreach(var styleToChange in buttonStyleDictionary){
-
-                //Retrieve each button and its position
-                (int,int) styleKey = styleToChange.Key;
-                
-                
-                //If key's corresponding position is occupied 
-                if(board.chessList.TryGetValue(styleKey, out _))
+            /*Iterate through each chess square*/
+            for (int x=1; x<9; x++)
+            {
+                for(int y=1; y<9; y++)
                 {
-                    //Retrieve piece
-                    Piece pieceToRender = board.chessList[styleKey];
-
-                    //Change its associated button to the default style
-                   
-                }
-                else
-                {
-                    //Else, render it as an empty default square
-                  
+                    //If square contains a piece
+                    if (board.chessList.TryGetValue((x, y), out _))
+                    {
+                        Piece pieceToRender = board.chessList[(x, y)];
+                        Style styleToRender = getDefaultPieceStyle(pieceToRender);
+                        board.styles[board.toCollectionKey((x,y))] = styleToRender;
+                    }
+                    else
+                    {
+                        board.styles[board.toCollectionKey((x, y))] = getSquareStyle(ButtonStyle.DefaultSquare);
+                    }         
                 }
             }
+
         }
 
+        public Style getSquareStyle(ButtonStyle inputVal)
+        {
+            switch(inputVal)
+            {
+                case ButtonStyle.DefaultSquare:
+                    return Application.Current.Resources["DefaultSquare"] as Style;
+
+                case ButtonStyle.ValidSquare:
+                    return Application.Current.Resources["ValidSquare"] as Style;
+
+                case ButtonStyle.InvalidSquare:
+                    return Application.Current.Resources["InvalidSquare"] as Style;                                 
+            }
+
+            throw new PieceStyleException("SquareStyle not found");
+        }
+
+
+        /* Find default button style for a piece */
         public Style getDefaultPieceStyle(Piece pieceToRender)
         {
-           //Find Default Button Style for the piece
             switch(pieceToRender)
             {
                 case BishopPiece p:
@@ -169,9 +167,9 @@ namespace Chessnet.ViewModels
             throw new PieceStyleException("Default Piece Button Style not found");
         }
 
+        /* Find valid button style for a piece */
         public Style getValidPieceStyle(Piece pieceToRender)
         {
-            //Find Default Button Style for the piece
             switch (pieceToRender)
             {
                 case BishopPiece p:
@@ -219,6 +217,7 @@ namespace Chessnet.ViewModels
             throw new PieceStyleException("ValidPiece Button Style not found");
         }
 
+        /* Find Invalid button style for a piece */
         public Style getInvalidPieceStyle(Piece pieceToRender)
         {
             //Find Default Button Style for the piece
@@ -269,31 +268,5 @@ namespace Chessnet.ViewModels
             throw new PieceStyleException("Invalid Piece Button Style not found");
         }
         #endregion NotActions
-
-        #region Others
-        public void initButtonStyleDictionary()
-        {
-            buttonStyleDictionary = new Dictionary<(int,int), Style>();
-
-            for(int x=1; x<9; x++)
-            {
-                for (int y = 1; y < 9; y++)
-                    buttonStyleDictionary.Add((x, y), Application.Current.Resources["DefaultSquare"] as Style);
-            }
-        }
-
-        public void initButtonCommandDictionary()
-        {
-            buttonCommandDictionary = new Dictionary<(int, int), ICommand>();
-
-            for (int x = 1; x < 9; x++)
-            {
-                for (int y = 1; y < 9; y++)
-                    buttonCommandDictionary.Add((x, y), null);
-            }
-
-        }
-
-        #endregion Others
     }
 }

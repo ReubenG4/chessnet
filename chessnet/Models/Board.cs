@@ -5,16 +5,24 @@ using System.Text;
 
 namespace Chessnet.Models
 {
-    class Board
+    public class Board
     {
-        private Tuple<int, int> position;
+        #region class variables
+        //List Of Pieces
+        public List<Piece> blackPieces;
+        public List<Piece> whitePieces;
 
-        /* List Of Pieces */
-        public List<Piece> blackPieces { get; set; }
-        public List<Piece> whitePieces { get; set; }
+        //Dictionary for O(n) access if state of board is known
+        public Dictionary<(int, int), Piece> chessList;
+        #endregion class variables
 
-        /* Dictionary for O(n) access if state of board is known*/
-        public Dictionary<(int, int), Piece> chessList { get; private set; }
+        #region class properties
+        /* Collections for holding the pieces associated commands and styles */
+        public ButtonCommandCollection commands { get; private set; }
+        public ButtonStyleCollection styles { get; private set; }
+        public ButtonTagCollection tags { get; private set; }
+
+        #endregion region class properties
 
         public Board()
         {
@@ -22,6 +30,12 @@ namespace Chessnet.Models
             whitePieces = new List<Piece>();
 
             chessList = new Dictionary<(int,int) , Piece>();
+
+            commands = new ButtonCommandCollection();
+
+            styles = new ButtonStyleCollection();
+
+            tags = new ButtonTagCollection();
         }
 
         public void reset()
@@ -107,10 +121,17 @@ namespace Chessnet.Models
             chessList.Add(position, pieceToAdd);
         }
 
-      
+        //Returns Key to access corresponding element in ButtonStyleCollection, ButtonCommandCollection
+        public int toCollectionKey(int fileVal, int rowVal)
+        {
+            return (rowVal * 8) + fileVal - 9;
+        }
 
-        
-      
+        public int toCollectionKey((int, int) posVal)
+        {
+            return (posVal.Item2 * 8) + posVal.Item1 - 9;
+        }
+
 
     }
 }

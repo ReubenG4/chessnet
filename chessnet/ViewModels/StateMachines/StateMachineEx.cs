@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using Chessnet.ViewModels.Commands;
 using Stateless;
 
 
-namespace Chessnet.ViewModels.Commands.StateMachines
+namespace Chessnet.ViewModels.StateMachines
 {
     public static class StateMachineEx
     {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows;
-using chessnet.ViewModels;
+﻿using System.Windows;
 using Chessnet.ViewModels.Commands;
 
-namespace chessnet.ViewModels
+namespace Chessnet.ViewModels
 {
     public class StartSplashViewModel
     {
