@@ -25,7 +25,7 @@ namespace chessnet
         public ChessBoardView()
         {
             InitializeComponent();
-            DataContext = new ChessBoardViewModel(this);
+            DataContext = new ChessBoardViewModel();
         }
         
     }

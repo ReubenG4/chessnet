@@ -3,52 +3,55 @@ using Chessnet.Models;
 using Chessnet.ViewModels.Commands.StateMachines;
 using Chessnet.ViewModels.StateMachines;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Chessnet.ViewModels
 {
-
-    public class ChessBoardViewModel 
+    public class ChessBoardViewModel
     {
         #region declarations
         /* Declare View and State Machine */
         ChessBoardMachine machine;
-        ChessBoardView _view;
 
         /* Declare board model*/
         Board board;
 
-        /* Declare dictionary to lookup button reference for a position */
-        private Dictionary<(int,int), Button> buttonDictionary;
+        /* Declare dictionary to lookup style reference for a button */
+        public Dictionary<(int,int), Style> buttonStyleDictionary;
+
+        /*Declare dictionary to lookup Command reference for a button*/
+        public Dictionary<(int, int), ICommand> buttonCommandDictionary;
 
         /*Commands*/
         public ICommand whitePieceChosenCommand { get; private set; }
 
         /* Constructor */
-        public ChessBoardViewModel(ChessBoardView view)
+        public ChessBoardViewModel()
         {
-            //Initialise view
-            _view = view;
-
             //Initialise StateMachine
             machine = new ChessBoardMachine(this);
 
             //Initialise Board model
             board = new Board();
 
-            //Initialise Button Dictionary
-            initButtonDictionary();
+            //Initialise ButtonStyles 
+            initButtonStyleDictionary();
+
+            //Initialise Commands
+            initButtonCommandDictionary();
 
             //Initialise commands for state machine
             whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
-
 
             //Initialise the game
             gameResetAction();
 
         }
+
+        
         #endregion declarations
 
         /*Actions: Methods directly invoked by state machine*/
@@ -64,7 +67,7 @@ namespace Chessnet.ViewModels
             renderBoard();
 
             //Place FSM in next state
-            machine.Fire(BoardTrigger.GameReset);
+            //machine.Fire(BoardTrigger.GameReset);
         }
 
         /*whiteTurnStartAction: Places game in WhiteTurnStart state */
@@ -77,14 +80,11 @@ namespace Chessnet.ViewModels
                 //Retrieve the appropiate style
                 Style validStyle = getValidPieceStyle(pieceToChange);
 
-                //Locate the button
-                Button buttonToChange = buttonDictionary[pieceToChange.getPosition()];
+                //Retrieve the reference to the position's button style
+                Style styleToChange = buttonStyleDictionary[pieceToChange.getPosition()];
 
                 //Change its style
-                buttonToChange.Style = validStyle;
-
-                //Change its command
-                buttonToChange.Command = whitePieceChosenCommand;
+                styleToChange = validStyle;
             }
         }
         #endregion Actions
@@ -96,25 +96,25 @@ namespace Chessnet.ViewModels
         public void renderBoard()
         {
             /*Iterate through each button*/
-            foreach(var square in buttonDictionary){
+            foreach(var styleToChange in buttonStyleDictionary){
 
                 //Retrieve each button and its position
-                (int,int) position = square.Key;
-                Button buttonToChange = square.Value;
+                (int,int) styleKey = styleToChange.Key;
                 
-                //If position is occupied 
-                if(board.chessList.TryGetValue(position, out _))
+                
+                //If key's corresponding position is occupied 
+                if(board.chessList.TryGetValue(styleKey, out _))
                 {
                     //Retrieve piece
-                    Piece pieceToRender = board.chessList[position];
+                    Piece pieceToRender = board.chessList[styleKey];
 
                     //Change its associated button to the default style
-                    buttonToChange.Style = getDefaultPieceStyle(pieceToRender);
+                   
                 }
                 else
                 {
                     //Else, render it as an empty default square
-                    buttonToChange.Style = Application.Current.Resources["DefaultSquare"] as Style;
+                  
                 }
             }
         }
@@ -271,81 +271,27 @@ namespace Chessnet.ViewModels
         #endregion NotActions
 
         #region Others
-        public void initButtonDictionary()
+        public void initButtonStyleDictionary()
         {
-            buttonDictionary = new Dictionary<(int,int), Button>();
+            buttonStyleDictionary = new Dictionary<(int,int), Style>();
 
-            buttonDictionary.Add((1, 1), _view.A1);
-            buttonDictionary.Add((2, 1), _view.B1);
-            buttonDictionary.Add((3, 1), _view.C1);
-            buttonDictionary.Add((4, 1), _view.D1);
-            buttonDictionary.Add((5, 1), _view.E1);
-            buttonDictionary.Add((6, 1), _view.F1);
-            buttonDictionary.Add((7, 1), _view.G1);
-            buttonDictionary.Add((8, 1), _view.H1);
+            for(int x=1; x<9; x++)
+            {
+                for (int y = 1; y < 9; y++)
+                    buttonStyleDictionary.Add((x, y), Application.Current.Resources["DefaultSquare"] as Style);
+            }
+        }
 
-            buttonDictionary.Add((1, 2), _view.A2);
-            buttonDictionary.Add((2, 2), _view.B2);
-            buttonDictionary.Add((3, 2), _view.C2);
-            buttonDictionary.Add((4, 2), _view.D2);
-            buttonDictionary.Add((5, 2), _view.E2);
-            buttonDictionary.Add((6, 2), _view.F2);
-            buttonDictionary.Add((7, 2), _view.G2);
-            buttonDictionary.Add((8, 2), _view.H2);
+        public void initButtonCommandDictionary()
+        {
+            buttonCommandDictionary = new Dictionary<(int, int), ICommand>();
 
-            buttonDictionary.Add((1, 3), _view.A3);
-            buttonDictionary.Add((2, 3), _view.B3);
-            buttonDictionary.Add((3, 3), _view.C3);
-            buttonDictionary.Add((4, 3), _view.D3);
-            buttonDictionary.Add((5, 3), _view.E3);
-            buttonDictionary.Add((6, 3), _view.F3);
-            buttonDictionary.Add((7, 3), _view.G3);
-            buttonDictionary.Add((8, 3), _view.H3);
+            for (int x = 1; x < 9; x++)
+            {
+                for (int y = 1; y < 9; y++)
+                    buttonCommandDictionary.Add((x, y), null);
+            }
 
-            buttonDictionary.Add((1, 4), _view.A4);
-            buttonDictionary.Add((2, 4), _view.B4);
-            buttonDictionary.Add((3, 4), _view.C4);
-            buttonDictionary.Add((4, 4), _view.D4);
-            buttonDictionary.Add((5, 4), _view.E4);
-            buttonDictionary.Add((6, 4), _view.F4);
-            buttonDictionary.Add((7, 4), _view.G4);
-            buttonDictionary.Add((8, 4), _view.H4);
-
-            buttonDictionary.Add((1, 5), _view.A5);
-            buttonDictionary.Add((2, 5), _view.B5);
-            buttonDictionary.Add((3, 5), _view.C5);
-            buttonDictionary.Add((4, 5), _view.D5);
-            buttonDictionary.Add((5, 5), _view.E5);
-            buttonDictionary.Add((6, 5), _view.F5);
-            buttonDictionary.Add((7, 5), _view.G5);
-            buttonDictionary.Add((8, 5), _view.H4);
-
-            buttonDictionary.Add((1, 6), _view.A6);
-            buttonDictionary.Add((2, 6), _view.B6);
-            buttonDictionary.Add((3, 6), _view.C6);
-            buttonDictionary.Add((4, 6), _view.D6);
-            buttonDictionary.Add((5, 6), _view.E6);
-            buttonDictionary.Add((6, 6), _view.F6);
-            buttonDictionary.Add((7, 6), _view.G6);
-            buttonDictionary.Add((8, 6), _view.H6);
-
-            buttonDictionary.Add((1, 7), _view.A7);
-            buttonDictionary.Add((2, 7), _view.B7);
-            buttonDictionary.Add((3, 7), _view.C7);
-            buttonDictionary.Add((4, 7), _view.D7);
-            buttonDictionary.Add((5, 7), _view.E7);
-            buttonDictionary.Add((6, 7), _view.F7);
-            buttonDictionary.Add((7, 7), _view.G7);
-            buttonDictionary.Add((8, 7), _view.H7);
-
-            buttonDictionary.Add((1, 8), _view.A8);
-            buttonDictionary.Add((2, 8), _view.B8);
-            buttonDictionary.Add((3, 8), _view.C8);
-            buttonDictionary.Add((4, 8), _view.D8);
-            buttonDictionary.Add((5, 8), _view.E8);
-            buttonDictionary.Add((6, 8), _view.F8);
-            buttonDictionary.Add((7, 8), _view.G8);
-            buttonDictionary.Add((8, 8), _view.H8);
         }
 
         #endregion Others
