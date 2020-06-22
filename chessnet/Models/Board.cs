@@ -9,11 +9,11 @@ namespace Chessnet.Models
     {
         #region class variables
         //List Of Pieces
-        public List<Piece> blackPieces;
-        public List<Piece> whitePieces;
+        private List<Piece> blackPieces;
+        private List<Piece> whitePieces;
 
         //Dictionary for O(n) access if state of board is known
-        public Dictionary<(int, int), Piece> chessList;
+        private Dictionary<(int, int), Piece> chessList;
         #endregion class variables
 
         #region class properties
@@ -88,7 +88,6 @@ namespace Chessnet.Models
         }
 
 
-
         /* Adds a piece to Board */
         public void addPiece(Piece pieceToAdd)
         {
@@ -119,6 +118,26 @@ namespace Chessnet.Models
 
             //Add it to dictionary of chess pieces in play
             chessList.Add(position, pieceToAdd);
+        }
+
+        public bool tryGetPiece((int, int) inputVal)
+        {
+            return chessList.TryGetValue(inputVal, out _);
+        }
+
+        public Piece getPiece((int,int)inputVal)
+        {
+            return chessList[inputVal];
+        }
+
+        public List<Piece>.Enumerator getBlackPieceEnumerator()
+        {
+            return blackPieces.GetEnumerator();
+        }
+
+        public List<Piece>.Enumerator getWhitePieceEnumerator()
+        {
+            return whitePieces.GetEnumerator();
         }
 
         //Returns Key to access corresponding element in ButtonStyleCollection, ButtonCommandCollection

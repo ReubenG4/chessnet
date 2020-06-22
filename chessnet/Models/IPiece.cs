@@ -30,6 +30,8 @@ namespace Chessnet.Models
         int file { get; set; }
         int row { get; set; }
 
+        PieceType pieceType { get; set; }
+
         //Set current position of piece
         public void setPosition(int fileValue, int rowValue);
         public void setPosition(File fileValue, int rowValue);
@@ -44,12 +46,13 @@ namespace Chessnet.Models
         public Colour colour { get; set; }
         public int file { get; set; }
         public int row { get; set; }
+        public PieceType pieceType { get; set; }
 
         public Piece(Colour colourVal, File fileVal, int rowVal)
         {
 
             colour = colourVal;
-
+          
             setPosition(fileVal, rowVal);
 
         }
@@ -84,7 +87,20 @@ namespace Chessnet.Models
 
         public BishopPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackBishop;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhiteBishop;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
+                
 
         }
 
@@ -96,7 +112,19 @@ namespace Chessnet.Models
 
         public KingPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackKing;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhiteKing;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
 
         }
     }
@@ -105,7 +133,19 @@ namespace Chessnet.Models
     {
         public KnightPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackKnight;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhiteKnight;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
 
         }
     }
@@ -114,7 +154,19 @@ namespace Chessnet.Models
     {
         public PawnPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackPawn;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhitePawn;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
 
         }
     }
@@ -124,7 +176,19 @@ namespace Chessnet.Models
         public QueenPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
 
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackQueen;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhiteQueen;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
         }
     }
 
@@ -132,7 +196,19 @@ namespace Chessnet.Models
     {
         public RookPiece(Colour colourVal, File fileVal, int rowVal) : base(colourVal, fileVal, rowVal)
         {
+            switch (colourVal)
+            {
+                case Colour.Black:
+                    pieceType = PieceType.BlackRook;
+                    break;
 
+                case Colour.White:
+                    pieceType = PieceType.WhiteRook;
+                    break;
+
+                default:
+                    throw new PieceColourException("Piece cannot be constructed, missing colour");
+            }
 
         }
     }
