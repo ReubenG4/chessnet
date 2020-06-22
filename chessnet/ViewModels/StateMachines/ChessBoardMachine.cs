@@ -17,7 +17,7 @@ namespace Chessnet.ViewModels.StateMachines
        BlackTurnEnd,
 
        BlackVictory,
-       WhiteVictory
+       WhiteVictory,
         
     }
 
@@ -49,14 +49,15 @@ namespace Chessnet.ViewModels.StateMachines
 
             /* States for white turn */
             this.Configure(BoardState.Startup)
-                .OnEntry(viewModel.gameResetAction)
+                .OnEntry(viewModel.GameResetAction)
                 .Permit(BoardTrigger.GameReset, BoardState.WhiteTurnStart);
 
             this.Configure(BoardState.WhiteTurnStart)
-                .OnEntry(viewModel.whiteTurnStartAction)
+                .OnEntry(viewModel.WhiteTurnStartAction)
                 .Permit(BoardTrigger.WhitePiecePicked, BoardState.WhitePieceHeld);
 
             this.Configure(BoardState.WhitePieceHeld)
+                .OnEntry(viewModel.WhitePieceHeldAction)
                 .Permit(BoardTrigger.WhitePieceDropped, BoardState.WhiteTurnStart)
                 .Permit(BoardTrigger.WhitePieceMoved, BoardState.WhiteTurnEnd);
 

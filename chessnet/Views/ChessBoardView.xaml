@@ -9,84 +9,84 @@
     <UniformGrid HorizontalAlignment="Left" Height="400" Width="400" Margin="25,25,0,0" VerticalAlignment="Top"  Columns="8" Rows="8">
 
         <!-- Row 8 -->
-        <Button Name ="A8" Style="{Binding board.styles[56], Mode=OneWay}" Command="{Binding board.commands[56], Mode=OneWay}" Tag="{Binding board.tags[56], Mode=OneWay}"/>
-        <Button Name ="B8" Style="{Binding board.styles[57], Mode=OneWay}" Command="{Binding board.commands[57], Mode=OneWay}" Tag="{Binding board.tags[57], Mode=OneWay}"/>
-        <Button Name ="C8" Style="{Binding board.styles[58], Mode=OneWay}" Command="{Binding board.commands[58], Mode=OneWay}" Tag="{Binding board.tags[58], Mode=OneWay}"/>
-        <Button Name ="D8" Style="{Binding board.styles[59], Mode=OneWay}" Command="{Binding board.commands[59], Mode=OneWay}" Tag="{Binding board.tags[59], Mode=OneWay}"/>
-        <Button Name ="E8" Style="{Binding board.styles[60], Mode=OneWay}" Command="{Binding board.commands[60], Mode=OneWay}" Tag="{Binding board.tags[60], Mode=OneWay}"/>
-        <Button Name ="F8" Style="{Binding board.styles[61], Mode=OneWay}" Command="{Binding board.commands[61], Mode=OneWay}" Tag="{Binding board.tags[61], Mode=OneWay}"/>
-        <Button Name ="G8" Style="{Binding board.styles[62], Mode=OneWay}" Command="{Binding board.commands[62], Mode=OneWay}" Tag="{Binding board.tags[62], Mode=OneWay}"/>
-        <Button Name ="H8" Style="{Binding board.styles[63], Mode=OneWay}" Command="{Binding board.commands[63], Mode=OneWay}" Tag="{Binding board.tags[63], Mode=OneWay}"/>
+        <Button Name ="A8" Style="{Binding board.styles[56], Mode=OneWay}" Command="{Binding board.commands[56], Mode=OneWay}" CommandParameter="56"/>
+        <Button Name ="B8" Style="{Binding board.styles[57], Mode=OneWay}" Command="{Binding board.commands[57], Mode=OneWay}" CommandParameter="57"/>
+        <Button Name ="C8" Style="{Binding board.styles[58], Mode=OneWay}" Command="{Binding board.commands[58], Mode=OneWay}" CommandParameter="58"/>
+        <Button Name ="D8" Style="{Binding board.styles[59], Mode=OneWay}" Command="{Binding board.commands[59], Mode=OneWay}" CommandParameter="59"/>
+        <Button Name ="E8" Style="{Binding board.styles[60], Mode=OneWay}" Command="{Binding board.commands[60], Mode=OneWay}" CommandParameter="60"/>
+        <Button Name ="F8" Style="{Binding board.styles[61], Mode=OneWay}" Command="{Binding board.commands[61], Mode=OneWay}" CommandParameter="61"/>
+        <Button Name ="G8" Style="{Binding board.styles[62], Mode=OneWay}" Command="{Binding board.commands[62], Mode=OneWay}" CommandParameter="62"/>
+        <Button Name ="H8" Style="{Binding board.styles[63], Mode=OneWay}" Command="{Binding board.commands[63], Mode=OneWay}" CommandParameter="63"/>
 
         <!-- Row 7 -->
-        <Button Name ="A7" Style="{Binding board.styles[48], Mode=OneWay}" Command="{Binding board.commands[48], Mode=OneWay}" Tag="{Binding board.tags[48], Mode=OneWay}"/>
-        <Button Name ="B7" Style="{Binding board.styles[49], Mode=OneWay}" Command="{Binding board.commands[49], Mode=OneWay}" Tag="{Binding board.tags[49], Mode=OneWay}"/>
-        <Button Name ="C7" Style="{Binding board.styles[50], Mode=OneWay}" Command="{Binding board.commands[50], Mode=OneWay}" Tag="{Binding board.tags[50], Mode=OneWay}"/>
-        <Button Name ="D7" Style="{Binding board.styles[51], Mode=OneWay}" Command="{Binding board.commands[51], Mode=OneWay}" Tag="{Binding board.tags[51], Mode=OneWay}"/>
-        <Button Name ="E7" Style="{Binding board.styles[52], Mode=OneWay}" Command="{Binding board.commands[52], Mode=OneWay}" Tag="{Binding board.tags[52], Mode=OneWay}"/>
-        <Button Name ="F7" Style="{Binding board.styles[53], Mode=OneWay}" Command="{Binding board.commands[53], Mode=OneWay}" Tag="{Binding board.tags[53], Mode=OneWay}"/>
-        <Button Name ="G7" Style="{Binding board.styles[54], Mode=OneWay}" Command="{Binding board.commands[54], Mode=OneWay}" Tag="{Binding board.tags[54], Mode=OneWay}"/>
-        <Button Name ="H7" Style="{Binding board.styles[55], Mode=OneWay}" Command="{Binding board.commands[55], Mode=OneWay}" Tag="{Binding board.tags[55], Mode=OneWay}"/>
+        <Button Name ="A7" Style="{Binding board.styles[48], Mode=OneWay}" Command="{Binding board.commands[48], Mode=OneWay}" CommandParameter="48"/>
+        <Button Name ="B7" Style="{Binding board.styles[49], Mode=OneWay}" Command="{Binding board.commands[49], Mode=OneWay}" CommandParameter="49"/>
+        <Button Name ="C7" Style="{Binding board.styles[50], Mode=OneWay}" Command="{Binding board.commands[50], Mode=OneWay}" CommandParameter="50"/>
+        <Button Name ="D7" Style="{Binding board.styles[51], Mode=OneWay}" Command="{Binding board.commands[51], Mode=OneWay}" CommandParameter="51"/>
+        <Button Name ="E7" Style="{Binding board.styles[52], Mode=OneWay}" Command="{Binding board.commands[52], Mode=OneWay}" CommandParameter="52"/>
+        <Button Name ="F7" Style="{Binding board.styles[53], Mode=OneWay}" Command="{Binding board.commands[53], Mode=OneWay}" CommandParameter="53"/>
+        <Button Name ="G7" Style="{Binding board.styles[54], Mode=OneWay}" Command="{Binding board.commands[54], Mode=OneWay}" CommandParameter="54"/>
+        <Button Name ="H7" Style="{Binding board.styles[55], Mode=OneWay}" Command="{Binding board.commands[55], Mode=OneWay}" CommandParameter="55"/>
 
         <!-- Row 6 -->
-        <Button Name ="A6" Style="{Binding board.styles[40], Mode=OneWay}" Command="{Binding board.commands[40], Mode=OneWay}" Tag="{Binding board.tags[40], Mode=OneWay}"/>
-        <Button Name ="B6" Style="{Binding board.styles[41], Mode=OneWay}" Command="{Binding board.commands[41], Mode=OneWay}" Tag="{Binding board.tags[41], Mode=OneWay}"/>
-        <Button Name ="C6" Style="{Binding board.styles[42], Mode=OneWay}" Command="{Binding board.commands[42], Mode=OneWay}" Tag="{Binding board.tags[42], Mode=OneWay}"/>
-        <Button Name ="D6" Style="{Binding board.styles[43], Mode=OneWay}" Command="{Binding board.commands[43], Mode=OneWay}" Tag="{Binding board.tags[43], Mode=OneWay}"/>
-        <Button Name ="E6" Style="{Binding board.styles[44], Mode=OneWay}" Command="{Binding board.commands[44], Mode=OneWay}" Tag="{Binding board.tags[44], Mode=OneWay}"/>
-        <Button Name ="F6" Style="{Binding board.styles[45], Mode=OneWay}" Command="{Binding board.commands[45], Mode=OneWay}" Tag="{Binding board.tags[45], Mode=OneWay}"/>
-        <Button Name ="G6" Style="{Binding board.styles[46], Mode=OneWay}" Command="{Binding board.commands[46], Mode=OneWay}" Tag="{Binding board.tags[46], Mode=OneWay}"/>
-        <Button Name ="H6" Style="{Binding board.styles[47], Mode=OneWay}" Command="{Binding board.commands[47], Mode=OneWay}" Tag="{Binding board.tags[47], Mode=OneWay}"/>
+        <Button Name ="A6" Style="{Binding board.styles[40], Mode=OneWay}" Command="{Binding board.commands[40], Mode=OneWay}" CommandParameter="40"/>
+        <Button Name ="B6" Style="{Binding board.styles[41], Mode=OneWay}" Command="{Binding board.commands[41], Mode=OneWay}" CommandParameter="41"/>
+        <Button Name ="C6" Style="{Binding board.styles[42], Mode=OneWay}" Command="{Binding board.commands[42], Mode=OneWay}" CommandParameter="42"/>
+        <Button Name ="D6" Style="{Binding board.styles[43], Mode=OneWay}" Command="{Binding board.commands[43], Mode=OneWay}" CommandParameter="43"/>
+        <Button Name ="E6" Style="{Binding board.styles[44], Mode=OneWay}" Command="{Binding board.commands[44], Mode=OneWay}" CommandParameter="44"/>
+        <Button Name ="F6" Style="{Binding board.styles[45], Mode=OneWay}" Command="{Binding board.commands[45], Mode=OneWay}" CommandParameter="45"/>
+        <Button Name ="G6" Style="{Binding board.styles[46], Mode=OneWay}" Command="{Binding board.commands[46], Mode=OneWay}" CommandParameter="46"/>
+        <Button Name ="H6" Style="{Binding board.styles[47], Mode=OneWay}" Command="{Binding board.commands[47], Mode=OneWay}" CommandParameter="47"/>
 
         <!-- Row 5 -->
-        <Button Name ="A5" Style="{Binding board.styles[32], Mode=OneWay}" Command="{Binding board.commands[32], Mode=OneWay}" Tag="{Binding board.tags[32], Mode=OneWay}"/>
-        <Button Name ="B5" Style="{Binding board.styles[33], Mode=OneWay}" Command="{Binding board.commands[33], Mode=OneWay}" Tag="{Binding board.tags[33], Mode=OneWay}"/>
-        <Button Name ="C5" Style="{Binding board.styles[34], Mode=OneWay}" Command="{Binding board.commands[34], Mode=OneWay}" Tag="{Binding board.tags[34], Mode=OneWay}"/>
-        <Button Name ="D5" Style="{Binding board.styles[35], Mode=OneWay}" Command="{Binding board.commands[35], Mode=OneWay}" Tag="{Binding board.tags[35], Mode=OneWay}"/>
-        <Button Name ="E5" Style="{Binding board.styles[36], Mode=OneWay}" Command="{Binding board.commands[36], Mode=OneWay}" Tag="{Binding board.tags[36], Mode=OneWay}"/>
-        <Button Name ="F5" Style="{Binding board.styles[37], Mode=OneWay}" Command="{Binding board.commands[37], Mode=OneWay}" Tag="{Binding board.tags[37], Mode=OneWay}"/>
-        <Button Name ="G5" Style="{Binding board.styles[38], Mode=OneWay}" Command="{Binding board.commands[38], Mode=OneWay}" Tag="{Binding board.tags[38], Mode=OneWay}"/>
-        <Button Name ="H5" Style="{Binding board.styles[39], Mode=OneWay}" Command="{Binding board.commands[39], Mode=OneWay}" Tag="{Binding board.tags[39], Mode=OneWay}"/>
+        <Button Name ="A5" Style="{Binding board.styles[32], Mode=OneWay}" Command="{Binding board.commands[32], Mode=OneWay}" CommandParameter="32"/>
+        <Button Name ="B5" Style="{Binding board.styles[33], Mode=OneWay}" Command="{Binding board.commands[33], Mode=OneWay}" CommandParameter="33"/>
+        <Button Name ="C5" Style="{Binding board.styles[34], Mode=OneWay}" Command="{Binding board.commands[34], Mode=OneWay}" CommandParameter="34"/>
+        <Button Name ="D5" Style="{Binding board.styles[35], Mode=OneWay}" Command="{Binding board.commands[35], Mode=OneWay}" CommandParameter="35"/>
+        <Button Name ="E5" Style="{Binding board.styles[36], Mode=OneWay}" Command="{Binding board.commands[36], Mode=OneWay}" CommandParameter="36"/>
+        <Button Name ="F5" Style="{Binding board.styles[37], Mode=OneWay}" Command="{Binding board.commands[37], Mode=OneWay}" CommandParameter="37"/>
+        <Button Name ="G5" Style="{Binding board.styles[38], Mode=OneWay}" Command="{Binding board.commands[38], Mode=OneWay}" CommandParameter="38"/>
+        <Button Name ="H5" Style="{Binding board.styles[39], Mode=OneWay}" Command="{Binding board.commands[39], Mode=OneWay}" CommandParameter="39"/>
 
         <!-- Row 4-->
-        <Button Name ="A4" Style="{Binding board.styles[24], Mode=OneWay}" Command="{Binding board.commands[24], Mode=OneWay}" Tag="{Binding board.tags[24], Mode=OneWay}"/>
-        <Button Name ="B4" Style="{Binding board.styles[25], Mode=OneWay}" Command="{Binding board.commands[25], Mode=OneWay}" Tag="{Binding board.tags[25], Mode=OneWay}"/>
-        <Button Name ="C4" Style="{Binding board.styles[26], Mode=OneWay}" Command="{Binding board.commands[26], Mode=OneWay}" Tag="{Binding board.tags[26], Mode=OneWay}"/>
-        <Button Name ="D4" Style="{Binding board.styles[27], Mode=OneWay}" Command="{Binding board.commands[27], Mode=OneWay}" Tag="{Binding board.tags[27], Mode=OneWay}"/>
-        <Button Name ="E4" Style="{Binding board.styles[28], Mode=OneWay}" Command="{Binding board.commands[28], Mode=OneWay}" Tag="{Binding board.tags[28], Mode=OneWay}"/>
-        <Button Name ="F4" Style="{Binding board.styles[29], Mode=OneWay}" Command="{Binding board.commands[29], Mode=OneWay}" Tag="{Binding board.tags[29], Mode=OneWay}"/>
-        <Button Name ="G4" Style="{Binding board.styles[30], Mode=OneWay}" Command="{Binding board.commands[30], Mode=OneWay}" Tag="{Binding board.tags[30], Mode=OneWay}"/>
-        <Button Name ="H4" Style="{Binding board.styles[31], Mode=OneWay}" Command="{Binding board.commands[31], Mode=OneWay}" Tag="{Binding board.tags[31], Mode=OneWay}"/>
+        <Button Name ="A4" Style="{Binding board.styles[24], Mode=OneWay}" Command="{Binding board.commands[24], Mode=OneWay}" CommandParameter="24"/>
+        <Button Name ="B4" Style="{Binding board.styles[25], Mode=OneWay}" Command="{Binding board.commands[25], Mode=OneWay}" CommandParameter="25"/>
+        <Button Name ="C4" Style="{Binding board.styles[26], Mode=OneWay}" Command="{Binding board.commands[26], Mode=OneWay}" CommandParameter="26"/>
+        <Button Name ="D4" Style="{Binding board.styles[27], Mode=OneWay}" Command="{Binding board.commands[27], Mode=OneWay}" CommandParameter="27"/>
+        <Button Name ="E4" Style="{Binding board.styles[28], Mode=OneWay}" Command="{Binding board.commands[28], Mode=OneWay}" CommandParameter="28"/>
+        <Button Name ="F4" Style="{Binding board.styles[29], Mode=OneWay}" Command="{Binding board.commands[29], Mode=OneWay}" CommandParameter="29"/>
+        <Button Name ="G4" Style="{Binding board.styles[30], Mode=OneWay}" Command="{Binding board.commands[30], Mode=OneWay}" CommandParameter="30"/>
+        <Button Name ="H4" Style="{Binding board.styles[31], Mode=OneWay}" Command="{Binding board.commands[31], Mode=OneWay}" CommandParameter="31"/>
 
         <!-- Row 3 -->
-        <Button Name ="A3" Style="{Binding board.styles[16], Mode=OneWay}" Command="{Binding board.commands[16], Mode=OneWay}" Tag="{Binding board.tags[16], Mode=OneWay}"/>
-        <Button Name ="B3" Style="{Binding board.styles[17], Mode=OneWay}" Command="{Binding board.commands[17], Mode=OneWay}" Tag="{Binding board.tags[17], Mode=OneWay}"/>
-        <Button Name ="C3" Style="{Binding board.styles[18], Mode=OneWay}" Command="{Binding board.commands[18], Mode=OneWay}" Tag="{Binding board.tags[18], Mode=OneWay}"/>
-        <Button Name ="D3" Style="{Binding board.styles[19], Mode=OneWay}" Command="{Binding board.commands[19], Mode=OneWay}" Tag="{Binding board.tags[19], Mode=OneWay}"/>
-        <Button Name ="E3" Style="{Binding board.styles[20], Mode=OneWay}" Command="{Binding board.commands[20], Mode=OneWay}" Tag="{Binding board.tags[20], Mode=OneWay}"/>
-        <Button Name ="F3" Style="{Binding board.styles[21], Mode=OneWay}" Command="{Binding board.commands[21], Mode=OneWay}" Tag="{Binding board.tags[21], Mode=OneWay}"/>
-        <Button Name ="G3" Style="{Binding board.styles[22], Mode=OneWay}" Command="{Binding board.commands[22], Mode=OneWay}" Tag="{Binding board.tags[22], Mode=OneWay}"/>
-        <Button Name ="H3" Style="{Binding board.styles[23], Mode=OneWay}" Command="{Binding board.commands[23], Mode=OneWay}" Tag="{Binding board.tags[23], Mode=OneWay}"/>
+        <Button Name ="A3" Style="{Binding board.styles[16], Mode=OneWay}" Command="{Binding board.commands[16], Mode=OneWay}" CommandParameter="16"/>
+        <Button Name ="B3" Style="{Binding board.styles[17], Mode=OneWay}" Command="{Binding board.commands[17], Mode=OneWay}" CommandParameter="17"/>
+        <Button Name ="C3" Style="{Binding board.styles[18], Mode=OneWay}" Command="{Binding board.commands[18], Mode=OneWay}" CommandParameter="18"/>
+        <Button Name ="D3" Style="{Binding board.styles[19], Mode=OneWay}" Command="{Binding board.commands[19], Mode=OneWay}" CommandParameter="19"/>
+        <Button Name ="E3" Style="{Binding board.styles[20], Mode=OneWay}" Command="{Binding board.commands[20], Mode=OneWay}" CommandParameter="20"/>
+        <Button Name ="F3" Style="{Binding board.styles[21], Mode=OneWay}" Command="{Binding board.commands[21], Mode=OneWay}" CommandParameter="21"/>
+        <Button Name ="G3" Style="{Binding board.styles[22], Mode=OneWay}" Command="{Binding board.commands[22], Mode=OneWay}" CommandParameter="22"/>
+        <Button Name ="H3" Style="{Binding board.styles[23], Mode=OneWay}" Command="{Binding board.commands[23], Mode=OneWay}" CommandParameter="23"/>
 
         <!-- Row 2 -->
-        <Button Name ="A2" Style="{Binding board.styles[8], Mode=OneWay}" Command="{Binding board.commands[8], Mode=OneWay}" Tag="{Binding board.tags[8], Mode=OneWay}"/>
-        <Button Name ="B2" Style="{Binding board.styles[9], Mode=OneWay}" Command="{Binding board.commands[9], Mode=OneWay}" Tag="{Binding board.tags[9], Mode=OneWay}"/>
-        <Button Name ="C2" Style="{Binding board.styles[10], Mode=OneWay}" Command="{Binding board.commands[10], Mode=OneWay}" Tag="{Binding board.tags[10], Mode=OneWay}"/>
-        <Button Name ="D2" Style="{Binding board.styles[11], Mode=OneWay}" Command="{Binding board.commands[11], Mode=OneWay}" Tag="{Binding board.tags[11], Mode=OneWay}"/>
-        <Button Name ="E2" Style="{Binding board.styles[12], Mode=OneWay}" Command="{Binding board.commands[12], Mode=OneWay}" Tag="{Binding board.tags[12], Mode=OneWay}"/>
-        <Button Name ="F2" Style="{Binding board.styles[13], Mode=OneWay}" Command="{Binding board.commands[13], Mode=OneWay}" Tag="{Binding board.tags[13], Mode=OneWay}"/>
-        <Button Name ="G2" Style="{Binding board.styles[14], Mode=OneWay}" Command="{Binding board.commands[14], Mode=OneWay}" Tag="{Binding board.tags[14], Mode=OneWay}"/>
-        <Button Name ="H2" Style="{Binding board.styles[15], Mode=OneWay}" Command="{Binding board.commands[15], Mode=OneWay}" Tag="{Binding board.tags[15], Mode=OneWay}"/>
+        <Button Name ="A2" Style="{Binding board.styles[8], Mode=OneWay}" Command="{Binding board.commands[8], Mode=OneWay}" CommandParameter="8"/>
+        <Button Name ="B2" Style="{Binding board.styles[9], Mode=OneWay}" Command="{Binding board.commands[9], Mode=OneWay}" CommandParameter="9"/>
+        <Button Name ="C2" Style="{Binding board.styles[10], Mode=OneWay}" Command="{Binding board.commands[10], Mode=OneWay}" CommandParameter="10"/>
+        <Button Name ="D2" Style="{Binding board.styles[11], Mode=OneWay}" Command="{Binding board.commands[11], Mode=OneWay}" CommandParameter="11"/>
+        <Button Name ="E2" Style="{Binding board.styles[12], Mode=OneWay}" Command="{Binding board.commands[12], Mode=OneWay}" CommandParameter="12"/>
+        <Button Name ="F2" Style="{Binding board.styles[13], Mode=OneWay}" Command="{Binding board.commands[13], Mode=OneWay}" CommandParameter="13"/>
+        <Button Name ="G2" Style="{Binding board.styles[14], Mode=OneWay}" Command="{Binding board.commands[14], Mode=OneWay}" CommandParameter="14"/>
+        <Button Name ="H2" Style="{Binding board.styles[15], Mode=OneWay}" Command="{Binding board.commands[15], Mode=OneWay}" CommandParameter="15"/>
         
         <!-- Row 1 -->
-        <Button Name ="A1" Style="{Binding board.styles[0], Mode=OneWay}" Command="{Binding board.commands[0], Mode=OneWay}" Tag="{Binding board.tags[0], Mode=OneWay}"/>
-        <Button Name ="B1" Style="{Binding board.styles[1], Mode=OneWay}" Command="{Binding board.commands[1], Mode=OneWay}" Tag="{Binding board.tags[1], Mode=OneWay}"/>
-        <Button Name ="C1" Style="{Binding board.styles[2], Mode=OneWay}" Command="{Binding board.commands[2], Mode=OneWay}" Tag="{Binding board.tags[2], Mode=OneWay}"/>
-        <Button Name ="D1" Style="{Binding board.styles[3], Mode=OneWay}" Command="{Binding board.commands[3], Mode=OneWay}" Tag="{Binding board.tags[3], Mode=OneWay}"/>
-        <Button Name ="E1" Style="{Binding board.styles[4], Mode=OneWay}" Command="{Binding board.commands[4], Mode=OneWay}" Tag="{Binding board.tags[4], Mode=OneWay}"/>
-        <Button Name ="F1" Style="{Binding board.styles[5], Mode=OneWay}" Command="{Binding board.commands[5], Mode=OneWay}" Tag="{Binding board.tags[5], Mode=OneWay}"/>
-        <Button Name ="G1" Style="{Binding board.styles[6], Mode=OneWay}" Command="{Binding board.commands[6], Mode=OneWay}" Tag="{Binding board.tags[6], Mode=OneWay}"/>
-        <Button Name ="H1" Style="{Binding board.styles[7], Mode=OneWay}" Command="{Binding board.commands[7], Mode=OneWay}" Tag="{Binding board.tags[7], Mode=OneWay}"/>
+        <Button Name ="A1" Style="{Binding board.styles[0], Mode=OneWay}" Command="{Binding board.commands[0], Mode=OneWay}" CommandParameter="0"/>
+        <Button Name ="B1" Style="{Binding board.styles[1], Mode=OneWay}" Command="{Binding board.commands[1], Mode=OneWay}" CommandParameter="1"/>
+        <Button Name ="C1" Style="{Binding board.styles[2], Mode=OneWay}" Command="{Binding board.commands[2], Mode=OneWay}" CommandParameter="2"/>
+        <Button Name ="D1" Style="{Binding board.styles[3], Mode=OneWay}" Command="{Binding board.commands[3], Mode=OneWay}" CommandParameter="3"/>
+        <Button Name ="E1" Style="{Binding board.styles[4], Mode=OneWay}" Command="{Binding board.commands[4], Mode=OneWay}" CommandParameter="4"/>
+        <Button Name ="F1" Style="{Binding board.styles[5], Mode=OneWay}" Command="{Binding board.commands[5], Mode=OneWay}" CommandParameter="5"/>
+        <Button Name ="G1" Style="{Binding board.styles[6], Mode=OneWay}" Command="{Binding board.commands[6], Mode=OneWay}" CommandParameter="6"/>
+        <Button Name ="H1" Style="{Binding board.styles[7], Mode=OneWay}" Command="{Binding board.commands[7], Mode=OneWay}" CommandParameter="7"/>
         
         
         

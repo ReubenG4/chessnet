@@ -30,9 +30,9 @@ namespace Chessnet.Models
         }
     }
 
-    public class ButtonTagCollection : ObservableCollection<int>
+    public class ButtonIDCollection : ObservableCollection<int>
     {
-        public ButtonTagCollection() : base()
+        public ButtonIDCollection() : base()
         {
             for (int x = 0; x < 64; x++)
             {

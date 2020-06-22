@@ -5,22 +5,19 @@ using System.Windows.Input;
 
 namespace Chessnet.ViewModels.Commands
 {
-    public class ChessButtonCommand : ICommand
+    //Used to disable buttons through property binding
+    public class DisableCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
-       
-         
-        public ChessButtonCommand()
+        public DisableCommand()
         {
            
         }
 
         public bool CanExecute(object parameter)
         {
-            if (parameter.GetType() == typeof(Button))
-                return true;
-            else
+           
                 return false;
         }
 

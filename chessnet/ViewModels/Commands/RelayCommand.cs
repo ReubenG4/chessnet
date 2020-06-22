@@ -4,147 +4,168 @@ using System.Windows.Input;
 
 namespace Chessnet.ViewModels.Commands
 {
-  /// <summary>
-  /// A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The default return value for the CanExecute method is 'true'.
-  /// </summary>
-  public class RelayCommand<T> : ICommand
-  {
-
-    #region Declarations
-
-    readonly Predicate<T> _canExecute;
-    readonly Action<T> _execute;
-
-    #endregion
-
-    #region Constructors
-
     /// <summary>
-    /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class and the command can always be executed.
+    /// A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The default return value for the CanExecute method is 'true'.
     /// </summary>
-    /// <param name="execute">The execution logic.</param>
-    public RelayCommand(Action<T> execute)
-      : this(execute, null)
-    {
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class.
-    /// </summary>
-    /// <param name="execute">The execution logic.</param>
-    /// <param name="canExecute">The execution status logic.</param>
-    public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+    public class RelayCommand<T> : ICommand
     {
 
-      if (execute == null)
-        throw new ArgumentNullException("execute");
-      _execute = execute;
-      _canExecute = canExecute;
-    }
+        #region Declarations
 
-    #endregion
+        readonly Predicate<T> _canExecute;
+        readonly Action<T> _execute;
+        object param;
 
-    #region ICommand Members
+        #endregion
 
-    public event EventHandler CanExecuteChanged
-    {
-      add
-      {
+        #region Constructors
 
-        if (_canExecute != null)
-          CommandManager.RequerySuggested += value;
-      }
-      remove
-      {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class and the command can always be executed.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        public RelayCommand(Action<T> execute)
+          : this(execute, null)
+        {
+        }
 
-        if (_canExecute != null)
-          CommandManager.RequerySuggested -= value;
-      }
-    }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+        {
 
-    [DebuggerStepThrough]
-    public Boolean CanExecute(Object parameter)
-    {
-      return _canExecute == null || _canExecute((T)parameter);
-    }
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            _execute = execute;
+            _canExecute = canExecute;
+        }
 
-    public void Execute(Object parameter)
-    {
-      _execute((T)parameter);
-    }
+        #endregion
 
-    #endregion
-  }
+        #region ICommand Members
 
-  /// <summary>
-  /// A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The default return value for the CanExecute method is 'true'.
-  /// </summary>
-  public class RelayCommand : ICommand
-  {
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
 
-    #region Declarations
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
 
-    readonly Func<Boolean> _canExecute;
-    readonly Action _execute;
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested -= value;
+            }
+        }
 
-    #endregion
+        [DebuggerStepThrough]
+        public Boolean CanExecute(Object parameter)
+        {
+            return _canExecute == null || _canExecute((T)parameter);
+        }
 
-    #region Constructors
+        public void Execute(Object parameter)
+        {
+            param = parameter;
+            _execute((T)parameter);
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class and the command can always be executed.
-    /// </summary>
-    /// <param name="execute">The execution logic.</param>
-    public RelayCommand(Action execute)
-      : this(execute, null)
-    {
+        public int getParamInt()
+        {
+            return int.Parse(param.ToString());
+        }
+
+        public string getParamString()
+        {
+            return param.ToString();
+        }
+        #endregion
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class.
+    /// A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The default return value for the CanExecute method is 'true'.
     /// </summary>
-    /// <param name="execute">The execution logic.</param>
-    /// <param name="canExecute">The execution status logic.</param>
-    public RelayCommand(Action execute, Func<Boolean> canExecute)
+    public class RelayCommand : ICommand
     {
 
-      if (execute == null)
-        throw new ArgumentNullException("execute");
-      _execute = execute;
-      _canExecute = canExecute;
+        #region Declarations
+
+        readonly Func<Boolean> _canExecute;
+        readonly Action _execute;
+        object param;
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class and the command can always be executed.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        public RelayCommand(Action execute)
+          : this(execute, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RelayCommand&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        public RelayCommand(Action execute, Func<Boolean> canExecute)
+        {
+
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        #endregion
+
+        #region ICommand Members
+
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+
+                if (_canExecute != null)
+                    CommandManager.RequerySuggested -= value;
+            }
+        }
+
+        [DebuggerStepThrough]
+        public Boolean CanExecute(Object parameter)
+        {
+            return _canExecute == null ? true : _canExecute();
+        }
+
+        public void Execute(Object parameter)
+        {
+            param = parameter;
+            _execute();
+        }
+
+        public int getParamInt()
+        {
+            return int.Parse(param.ToString());
+        }
+
+        public string getParamString()
+        {
+            return param.ToString();
+        }
+        #endregion
     }
-
-    #endregion
-
-    #region ICommand Members
-
-    public event EventHandler CanExecuteChanged
-    {
-      add
-      {
-
-        if (_canExecute != null)
-          CommandManager.RequerySuggested += value;
-      }
-      remove
-      {
-
-        if (_canExecute != null)
-          CommandManager.RequerySuggested -= value;
-      }
-    }
-
-    [DebuggerStepThrough]
-    public Boolean CanExecute(Object parameter)
-    {
-      return _canExecute == null ? true : _canExecute();
-    }
-
-    public void Execute(Object parameter)
-    {
-      _execute();
-    }
-
-    #endregion
-  }
 }

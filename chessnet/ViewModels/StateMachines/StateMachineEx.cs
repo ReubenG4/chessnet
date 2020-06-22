@@ -8,7 +8,7 @@ namespace Chessnet.ViewModels.StateMachines
     public static class StateMachineEx
     {
 
-        public static ICommand CreateCommand<TState, TTrigger>(this StateMachine<TState, TTrigger> stateMachine, TTrigger trigger)
+        public static RelayCommand CreateCommand<TState, TTrigger>(this StateMachine<TState, TTrigger> stateMachine, TTrigger trigger)
         {
             return new RelayCommand
               (

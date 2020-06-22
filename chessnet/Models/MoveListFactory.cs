@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Chessnet.Models
 {
-    class MoveListFactory
+    public static class MoveListFactory
     {
-        public List<Move> createBishopMoveList()
+        public static List<Move> CreateBishopMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -29,7 +29,7 @@ namespace Chessnet.Models
             return moveset;
         }
 
-        public List<Move> createKingMoveList()
+        public static List<Move> CreateKingMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -68,7 +68,7 @@ namespace Chessnet.Models
             return moveset;
         }
 
-        public List<Move> createKnightMoveList()
+        public static List<Move> CreateKnightMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -116,7 +116,7 @@ namespace Chessnet.Models
 
         }
 
-        public List<Move> createWhitePawnMoveList()
+        public static List<Move> CreateWhitePawnMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -131,7 +131,7 @@ namespace Chessnet.Models
             return moveset;
         }
 
-        public List<Move> createBlackPawnMoveList()
+        public static List<Move> CreateBlackPawnMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -146,7 +146,7 @@ namespace Chessnet.Models
             return moveset;
         }
 
-        public List<Move> createQueenMoveList()
+        public static List<Move> CreateQueenMoveList()
         {
             List<Move> moveset = new List<Move>();
 
@@ -185,7 +185,7 @@ namespace Chessnet.Models
             return moveset;
         }
 
-        public List<Move> createRookMoveList()
+        public static List<Move> CreateRookMoveList()
         {
             List<Move> moveset = new List<Move>();
 

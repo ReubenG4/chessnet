@@ -20,7 +20,6 @@ namespace Chessnet.Models
         /* Collections for holding the pieces associated commands and styles */
         public ButtonCommandCollection commands { get; private set; }
         public ButtonStyleCollection styles { get; private set; }
-        public ButtonTagCollection tags { get; private set; }
 
         #endregion region class properties
 
@@ -35,61 +34,60 @@ namespace Chessnet.Models
 
             styles = new ButtonStyleCollection();
 
-            tags = new ButtonTagCollection();
         }
 
-        public void reset()
+        public void Reset()
         {
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
             chessList = new Dictionary<(int,int), Piece>();
 
-            PieceFactory piecefactory = new PieceFactory();
+            
 
             /*Create White Pieces */
-            addPiece(piecefactory.CreatePawn(Colour.White, File.A, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.B, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.C, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.D, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.E, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.F, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.G, 2));
-            addPiece(piecefactory.CreatePawn(Colour.White, File.H, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.A, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.B, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.C, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.D, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.E, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.F, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.G, 2));
+            AddPiece(PieceFactory.CreatePawn(Colour.White, File.H, 2));
 
-            addPiece(piecefactory.CreateRook(Colour.White, File.A, 1));
-            addPiece(piecefactory.CreateKnight(Colour.White, File.B, 1));
-            addPiece(piecefactory.CreateBishop(Colour.White, File.C, 1));
-            addPiece(piecefactory.CreateKing(Colour.White, File.D, 1));
-            addPiece(piecefactory.CreateQueen(Colour.White, File.E, 1));
-            addPiece(piecefactory.CreateBishop(Colour.White, File.F, 1));
-            addPiece(piecefactory.CreateKnight(Colour.White, File.G, 1));
-            addPiece(piecefactory.CreateRook(Colour.White, File.H, 1));
+            AddPiece(PieceFactory.CreateRook(Colour.White, File.A, 1));
+            AddPiece(PieceFactory.CreateKnight(Colour.White, File.B, 1));
+            AddPiece(PieceFactory.CreateBishop(Colour.White, File.C, 1));
+            AddPiece(PieceFactory.CreateKing(Colour.White, File.D, 1));
+            AddPiece(PieceFactory.CreateQueen(Colour.White, File.E, 1));
+            AddPiece(PieceFactory.CreateBishop(Colour.White, File.F, 1));
+            AddPiece(PieceFactory.CreateKnight(Colour.White, File.G, 1));
+            AddPiece(PieceFactory.CreateRook(Colour.White, File.H, 1));
 
             /*Create Black Pieces */
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.A, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.B, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.C, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.D, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.E, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.F, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.G, 7));
-            addPiece(piecefactory.CreatePawn(Colour.Black, File.H, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.A, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.B, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.C, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.D, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.E, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.F, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.G, 7));
+            AddPiece(PieceFactory.CreatePawn(Colour.Black, File.H, 7));
 
-            addPiece(piecefactory.CreateRook(Colour.Black, File.A, 8));
-            addPiece(piecefactory.CreateKnight(Colour.Black, File.B, 8));
-            addPiece(piecefactory.CreateBishop(Colour.Black, File.C, 8));
-            addPiece(piecefactory.CreateKing(Colour.Black, File.D, 8));
-            addPiece(piecefactory.CreateQueen(Colour.Black, File.E, 8));
-            addPiece(piecefactory.CreateBishop(Colour.Black, File.F, 8));
-            addPiece(piecefactory.CreateKnight(Colour.Black, File.G, 8));
-            addPiece(piecefactory.CreateRook(Colour.Black, File.H, 8));
+            AddPiece(PieceFactory.CreateRook(Colour.Black, File.A, 8));
+            AddPiece(PieceFactory.CreateKnight(Colour.Black, File.B, 8));
+            AddPiece(PieceFactory.CreateBishop(Colour.Black, File.C, 8));
+            AddPiece(PieceFactory.CreateKing(Colour.Black, File.D, 8));
+            AddPiece(PieceFactory.CreateQueen(Colour.Black, File.E, 8));
+            AddPiece(PieceFactory.CreateBishop(Colour.Black, File.F, 8));
+            AddPiece(PieceFactory.CreateKnight(Colour.Black, File.G, 8));
+            AddPiece(PieceFactory.CreateRook(Colour.Black, File.H, 8));
 
         }
 
 
         /* Adds a piece to Board */
-        public void addPiece(Piece pieceToAdd)
+        public void AddPiece(Piece pieceToAdd)
         {
             
             /* Board should not add an invalid piece */
@@ -120,33 +118,33 @@ namespace Chessnet.Models
             chessList.Add(position, pieceToAdd);
         }
 
-        public bool tryGetPiece((int, int) inputVal)
+        public bool TryGetPiece((int, int) inputVal)
         {
             return chessList.TryGetValue(inputVal, out _);
         }
 
-        public Piece getPiece((int,int)inputVal)
+        public Piece GetPiece((int,int)inputVal)
         {
             return chessList[inputVal];
         }
 
-        public List<Piece>.Enumerator getBlackPieceEnumerator()
+        public List<Piece>.Enumerator GetBlackPieceEnumerator()
         {
             return blackPieces.GetEnumerator();
         }
 
-        public List<Piece>.Enumerator getWhitePieceEnumerator()
+        public List<Piece>.Enumerator GetWhitePieceEnumerator()
         {
             return whitePieces.GetEnumerator();
         }
 
         //Returns Key to access corresponding element in ButtonStyleCollection, ButtonCommandCollection
-        public int toCollectionKey(int fileVal, int rowVal)
+        public int ToCollectionKey(int fileVal, int rowVal)
         {
             return (rowVal * 8) + fileVal - 9;
         }
 
-        public int toCollectionKey((int, int) posVal)
+        public int ToCollectionKey((int, int) posVal)
         {
             return (posVal.Item2 * 8) + posVal.Item1 - 9;
         }
