@@ -55,6 +55,24 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ChosenSquare" TargetType= "Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+                        <Rectangle x:Name="backgroundElement" Fill="AliceBlue" Stroke="{TemplateBinding Foreground}" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Fill" TargetName="backgroundElement" Value="Blue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- White Piece ButtonStyles -->
 
     <Style x:Key="DefaultWhiteBishop" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
@@ -68,6 +86,11 @@
     </Style>
 
     <Style x:Key="InvalidWhiteBishop" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9815;"/>
+    </Style>
+
+    <Style x:Key="ChosenWhiteBishop" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9815;"/>
     </Style>
@@ -87,6 +110,11 @@
         <Setter Property="Content" Value="&#9812;"/>
     </Style>
 
+    <Style x:Key="ChosenWhiteKing" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9812;"/>
+    </Style>
+
     <Style x:Key="DefaultWhiteKnight" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9816;"/>
@@ -98,6 +126,11 @@
     </Style>
 
     <Style x:Key="InvalidWhiteKnight" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9816;"/>
+    </Style>
+
+    <Style x:Key="ChosenWhiteKnight" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9816;"/>
     </Style>
@@ -117,6 +150,11 @@
         <Setter Property="Content" Value="&#9817;"/>
     </Style>
 
+    <Style x:Key="ChosenWhitePawn" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9817;"/>
+    </Style>
+
     <Style x:Key="DefaultWhiteQueen" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9813;"/>
@@ -132,6 +170,11 @@
         <Setter Property="Content" Value="&#9813;"/>
     </Style>
 
+    <Style x:Key="ChosenWhiteQueen" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9813;"/>
+    </Style>
+
     <Style x:Key="DefaultWhiteRook" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9814;"/>
@@ -143,6 +186,11 @@
     </Style>
 
     <Style x:Key="InvalidWhiteRook" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9814;"/>
+    </Style>
+
+    <Style x:Key="ChosenWhiteRook" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9814;"/>
     </Style>
@@ -165,6 +213,11 @@
         <Setter Property="Content" Value="&#9821;"/>
     </Style>
 
+    <Style x:Key="ChosenBlackBishop" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9821;"/>
+    </Style>
+
     <Style x:Key="DefaultBlackKing" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9818;"/>
@@ -176,6 +229,11 @@
     </Style>
 
     <Style x:Key="InvalidBlackKing" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9818;"/>
+    </Style>
+
+    <Style x:Key="ChosenBlackKing" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9818;"/>
     </Style>
@@ -195,6 +253,11 @@
         <Setter Property="Content" Value="&#9822;"/>
     </Style>
 
+    <Style x:Key="ChosenBlackKnight" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9822;"/>
+    </Style>
+
     <Style x:Key="DefaultBlackPawn" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="Content" Value="&#9823;"/>
@@ -206,6 +269,11 @@
     </Style>
 
     <Style x:Key="InvalidBlackPawn" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Content" Value="&#9823;"/>
+    </Style>
+
+    <Style x:Key="ChosenBlackPawn" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="Content" Value="&#9823;"/>
     </Style>
@@ -225,6 +293,11 @@
         <Setter Property="Content" Value="&#9819;"/>
     </Style>
 
+    <Style x:Key="ChosenBlackQueen" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9819;"/>
+    </Style>
+
     <Style x:Key="DefaultBlackRook" TargetType= "Button" BasedOn="{StaticResource DefaultSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9820;"/>
@@ -236,6 +309,11 @@
     </Style>
 
     <Style x:Key="InvalidBlackRook" TargetType= "Button" BasedOn="{StaticResource InvalidSquare}">
+        <Setter Property="FontSize" Value="38"/>
+        <Setter Property="Content" Value="&#9820;"/>
+    </Style>
+
+    <Style x:Key="ChosenBlackRook" TargetType= "Button" BasedOn="{StaticResource ChosenSquare}">
         <Setter Property="FontSize" Value="38"/>
         <Setter Property="Content" Value="&#9820;"/>
     </Style>

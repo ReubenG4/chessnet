@@ -19,6 +19,7 @@ namespace Chessnet.ViewModels
 
         /*Commands*/
         public RelayCommand whitePieceChosenCommand { get; private set; }
+        public RelayCommand whitePieceDroppedCommand { get; private set; }
 
         //Used to disable a button from use, never able to execute
         public DisabledCommand disabledCommand { get; private set; }
@@ -39,6 +40,7 @@ namespace Chessnet.ViewModels
             disabledCommand = new DisabledCommand();
 
             whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
+            whitePieceDroppedCommand = machine.CreateCommand(BoardTrigger.WhitePieceDropped);
 
             //Initialise the game
             GameResetAction();
@@ -46,7 +48,7 @@ namespace Chessnet.ViewModels
         }
         #endregion constructors
 
-        /*Actions: Methods directly invoked by state machine*/
+        /*Actions: Methods directly invoked by state machine, typically set up to fire onEntry for a state*/
         #region Actions
 
         /*gameResetAction: Resets game*/
@@ -65,15 +67,15 @@ namespace Chessnet.ViewModels
         /*whiteTurnStartAction: Places game in WhiteTurnStart state */
         public void WhiteTurnStartAction()
         {
-            var enumerator = board.GetWhitePieceEnumerator();
+            var pieceEnumerator = board.GetWhitePieceEnumerator();
 
             /* Iterate through each whitePiece */
-            while(enumerator.MoveNext())
+            while(pieceEnumerator.MoveNext())
             {
                 //Retrieve the piece's valid style
-                Style validStyle = ChessButtonStyle.Valid(enumerator.Current.pieceType);
+                Style validStyle = ChessButtonStyle.Valid(pieceEnumerator.Current.pieceType);
                 //Retrieve the piece's position
-                (int, int) position = enumerator.Current.getPosition();
+                (int, int) position = pieceEnumerator.Current.getPosition();
 
                 //Change the piece's style and command
                 board.styles[board.ToCollectionKey(position)] = validStyle;
@@ -81,22 +83,34 @@ namespace Chessnet.ViewModels
             }       
         }
 
+        /*WhitePieceHeldAction: Places game in WhitePieceHeld state */
         public void WhitePieceHeldAction()
         {
-            var enumerator = board.GetWhitePieceEnumerator();
+            var pieceEnumerator = board.GetWhitePieceEnumerator();
+            int pieceKey = whitePieceChosenCommand.getParamInt();
 
-            /* Iterate through each whitePiece */
-            while (enumerator.MoveNext())
+            //Iterate through each whitePiece 
+            while (pieceEnumerator.MoveNext())
             {
                 //Retrieve the piece's default style
-                Style defaultStyle = ChessButtonStyle.Default(enumerator.Current.pieceType);
+                Style defaultStyle = ChessButtonStyle.Default(pieceEnumerator.Current.pieceType);
                 //Retrieve the piece's position
-                (int, int) position = enumerator.Current.getPosition();
+                (int, int) position = pieceEnumerator.Current.getPosition();
 
-                //Change the piece's style and command
+                //Change the piece's style and command (Disable the piece from being selected)
                 board.styles[board.ToCollectionKey(position)] = defaultStyle;
                 board.commands[board.ToCollectionKey(position)] = disabledCommand;
             }
+
+            //Retrieve the piece chosen
+            Piece pieceChosen = board.GetPiece(pieceKey);
+
+            //Set it to whitePieceDroppedCommand
+            board.commands[pieceKey] = whitePieceDroppedCommand;
+
+            //Set it to white piece chosen style
+            board.styles[pieceKey] = ChessButtonStyle.Chosen(pieceChosen.pieceType);
+         
         }
         #endregion Actions
 

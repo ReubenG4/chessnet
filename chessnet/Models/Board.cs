@@ -13,7 +13,7 @@ namespace Chessnet.Models
         private List<Piece> whitePieces;
 
         //Dictionary for O(n) access if state of board is known
-        private Dictionary<(int, int), Piece> chessList;
+        private Dictionary<(int, int), Piece> chessPieceList;
         #endregion class variables
 
         #region class properties
@@ -28,7 +28,7 @@ namespace Chessnet.Models
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
-            chessList = new Dictionary<(int,int) , Piece>();
+            chessPieceList = new Dictionary<(int,int) , Piece>();
 
             commands = new ButtonCommandCollection();
 
@@ -41,7 +41,7 @@ namespace Chessnet.Models
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
-            chessList = new Dictionary<(int,int), Piece>();
+            chessPieceList = new Dictionary<(int,int), Piece>();
 
             
 
@@ -103,7 +103,7 @@ namespace Chessnet.Models
                 throw (new PiecePositionException("pieceToAdd has out-of-bounds position, invalid"));
 
             //Check if position is empty
-            if (chessList.ContainsKey(position))
+            if (chessPieceList.ContainsKey(position))
                 throw (new PieceNotFoundException("pieceToAdd is being added to an occupied position, invalid"));
 
             //Check if colour is valid and add it to the proper list
@@ -115,17 +115,27 @@ namespace Chessnet.Models
                 throw (new PieceColourException("Invalid colour for pieceToAdd"));
 
             //Add it to dictionary of chess pieces in play
-            chessList.Add(position, pieceToAdd);
+            chessPieceList.Add(position, pieceToAdd);
         }
 
-        public bool TryGetPiece((int, int) inputVal)
+        public bool TryGetPiece((int, int) posVal)
         {
-            return chessList.TryGetValue(inputVal, out _);
+            return chessPieceList.TryGetValue(posVal, out _);
         }
 
-        public Piece GetPiece((int,int)inputVal)
+        public bool TryGetPiece(int keyVal)
         {
-            return chessList[inputVal];
+            return chessPieceList.TryGetValue(ToPositionKey(keyVal), out _);
+        }
+
+        public Piece GetPiece((int,int)posVal)
+        {
+            return chessPieceList[posVal];
+        }
+
+        public Piece GetPiece(int posVal)
+        {
+            return chessPieceList[ToPositionKey(posVal)];
         }
 
         public List<Piece>.Enumerator GetBlackPieceEnumerator()
@@ -138,7 +148,7 @@ namespace Chessnet.Models
             return whitePieces.GetEnumerator();
         }
 
-        //Returns Key to access corresponding element in ButtonStyleCollection, ButtonCommandCollection
+        //Translates position into a key to access ButtonDataCollections
         public int ToCollectionKey(int fileVal, int rowVal)
         {
             return (rowVal * 8) + fileVal - 9;
@@ -149,6 +159,9 @@ namespace Chessnet.Models
             return (posVal.Item2 * 8) + posVal.Item1 - 9;
         }
 
-
+        public (int,int) ToPositionKey(int keyVal)
+        {
+            return ((keyVal+1) / 8, (keyVal % 8));
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Chessnet.ViewModels.Commands
 {
-    //Used to disable buttons through property binding
+    //Used to disable buttons through command property binding
     public class DisabledCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;

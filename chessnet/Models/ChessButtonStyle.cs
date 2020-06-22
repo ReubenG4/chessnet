@@ -81,6 +81,25 @@ namespace Chessnet.Models
             {PieceType.WhiteRook, "InvalidWhiteRook" },
         };
 
+        private static readonly Dictionary<PieceType, string> chosenDictionary = new Dictionary<PieceType, string>()
+        {
+            {PieceType.EmptySquare,"ChosenSquare" },
+
+            {PieceType.BlackBishop, "ChosenBlackBishop"},
+            {PieceType.BlackKing, "ChosenBlackKing" },
+            {PieceType.BlackKnight, "ChosenBlackKnight" },
+            {PieceType.BlackPawn, "ChosenBlackPawn" },
+            {PieceType.BlackQueen, "ChosenBlackQueen"},
+            {PieceType.BlackRook, "ChosenBlackRook" },
+
+            {PieceType.WhiteBishop, "ChosenWhiteBishop"},
+            {PieceType.WhiteKing, "ChosenWhiteKing" },
+            {PieceType.WhiteKnight, "ChosenWhiteKnight" },
+            {PieceType.WhitePawn, "ChosenWhitePawn" },
+            {PieceType.WhiteQueen, "ChosenWhiteQueen"},
+            {PieceType.WhiteRook, "ChosenWhiteRook" },
+        };
+
         /* Find default button style for a piece */
         public static Style Default(PieceType typeVal)
         {
@@ -106,6 +125,15 @@ namespace Chessnet.Models
                 return Application.Current.Resources[invalidDictionary[typeVal]] as Style;
 
             throw new PieceStyleException("Invalid Style not found");
+        }
+
+        /* Find Chosen button style for a piece */
+        public static Style Chosen(PieceType typeVal)
+        {
+            if (defaultDictionary.TryGetValue(typeVal, out _))
+                return Application.Current.Resources[chosenDictionary[typeVal]] as Style;
+
+            throw new PieceStyleException("Chosen Style not found");
         }
     }
 }
