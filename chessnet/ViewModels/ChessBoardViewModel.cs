@@ -20,8 +20,8 @@ namespace Chessnet.ViewModels
         /*Commands*/
         public RelayCommand whitePieceChosenCommand { get; private set; }
 
-        //Used to disable a button from use, unable to fire
-        public DisableCommand disableCommand { get; private set; }
+        //Used to disable a button from use, never able to execute
+        public DisabledCommand disabledCommand { get; private set; }
 
         #endregion declarations
 
@@ -36,7 +36,7 @@ namespace Chessnet.ViewModels
             board = new Board();
 
             //Initialise commands for state machine
-            disableCommand = new DisableCommand();
+            disabledCommand = new DisabledCommand();
 
             whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
 
@@ -95,7 +95,7 @@ namespace Chessnet.ViewModels
 
                 //Change the piece's style and command
                 board.styles[board.ToCollectionKey(position)] = defaultStyle;
-                board.commands[board.ToCollectionKey(position)] = disableCommand;
+                board.commands[board.ToCollectionKey(position)] = disabledCommand;
             }
         }
         #endregion Actions
@@ -121,13 +121,13 @@ namespace Chessnet.ViewModels
                         //Render it in default style
                         board.styles[board.ToCollectionKey((x,y))] = styleToRender;
                         //Set command to disabledCommand
-                        board.commands[board.ToCollectionKey((x,y))] = disableCommand;
+                        board.commands[board.ToCollectionKey((x,y))] = disabledCommand;
                     }
                     else
                     {
                         //Render it as a default square
                         board.styles[board.ToCollectionKey((x, y))] = ChessButtonStyle.Default(PieceType.EmptySquare);
-                        board.commands[board.ToCollectionKey((x, y))] = disableCommand;
+                        board.commands[board.ToCollectionKey((x, y))] = disabledCommand;
                     }         
                 }
             }
