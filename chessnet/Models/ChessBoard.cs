@@ -5,45 +5,53 @@ using System.Text;
 
 namespace Chessnet.Models
 {
-    public class Board
+    public class ChessBoard
     {
         #region class variables
-        //List Of Pieces
+        //Dimensions
+        private int noOfFiles;
+        private int noOfRows;
+
+        //List Of Chess Pieces
         private List<Piece> blackPieces;
         private List<Piece> whitePieces;
 
         //Dictionary for O(n) access if state of board is known
-        private Dictionary<(int, int), Piece> chessPieceList;
+        private Dictionary<(int, int), Piece> pieceList;
+
+        //Used to find the possible paths for a chess piece
+        private ChessPathEngine pathEngine;
         #endregion class variables
 
+
         #region class properties
-        /* Collections for holding the pieces associated commands and styles */
-        public ButtonCommandCollection commands { get; private set; }
-        public ButtonStyleCollection styles { get; private set; }
+        /* Observable collections for holding the Chess pieces associated commands and styles */
 
-        #endregion region class properties
+        #endregion class properties
 
-        public Board()
+        public ChessBoard()
         {
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
-            chessPieceList = new Dictionary<(int,int) , Piece>();
+            pieceList = new Dictionary<(int,int) , Piece>();
 
-            commands = new ButtonCommandCollection();
+            pathEngine = new ChessPathEngine(this);
 
-            styles = new ButtonStyleCollection();
+            noOfFiles = 8;
+            noOfRows = 8;
 
         }
 
+        /*Used to reset the board to starting state*/
         public void Reset()
         {
             blackPieces = new List<Piece>();
             whitePieces = new List<Piece>();
 
-            chessPieceList = new Dictionary<(int,int), Piece>();
+            pieceList = new Dictionary<(int, int), Piece>();
 
-            
+            pathEngine = new ChessPathEngine(this);
 
             /*Create White Pieces */
             AddPiece(PieceFactory.CreatePawn(Colour.White, File.A, 2));
@@ -93,17 +101,17 @@ namespace Chessnet.Models
             /* Board should not add an invalid piece */
 
             //Retrieve position and colour
-            File file = (File)pieceToAdd.file;
+            int file = pieceToAdd.file;
             int row = pieceToAdd.row;
             (int,int) position = pieceToAdd.getPosition();
             Colour colour = pieceToAdd.colour;
 
             //Check if position is valid
-            if (row < 1 || row > 8 || file < File.A || file > File.H)
+            if (row < 1 || row > noOfRows || file < 1 || file > noOfFiles)
                 throw (new PiecePositionException("pieceToAdd has out-of-bounds position, invalid"));
 
             //Check if position is empty
-            if (chessPieceList.ContainsKey(position))
+            if (pieceList.ContainsKey(position))
                 throw (new PieceNotFoundException("pieceToAdd is being added to an occupied position, invalid"));
 
             //Check if colour is valid and add it to the proper list
@@ -115,27 +123,34 @@ namespace Chessnet.Models
                 throw (new PieceColourException("Invalid colour for pieceToAdd"));
 
             //Add it to dictionary of chess pieces in play
-            chessPieceList.Add(position, pieceToAdd);
+            pieceList.Add(position, pieceToAdd);
+        }
+
+        public List<List<(int,int)>> GetPaths(Piece pieceToCheck)
+        {
+
+
+            return null;
         }
 
         public bool TryGetPiece((int, int) posVal)
         {
-            return chessPieceList.TryGetValue(posVal, out _);
+            return pieceList.TryGetValue(posVal, out _);
         }
 
         public bool TryGetPiece(int keyVal)
         {
-            return chessPieceList.TryGetValue(ToPositionKey(keyVal), out _);
+            return pieceList.TryGetValue(ToPosition(keyVal), out _);
         }
 
         public Piece GetPiece((int,int)posVal)
         {
-            return chessPieceList[posVal];
+            return pieceList[posVal];
         }
 
         public Piece GetPiece(int posVal)
         {
-            return chessPieceList[ToPositionKey(posVal)];
+            return pieceList[ToPosition(posVal)];
         }
 
         public List<Piece>.Enumerator GetBlackPieceEnumerator()
@@ -151,17 +166,18 @@ namespace Chessnet.Models
         //Translates position into a key to access ButtonDataCollections
         public int ToCollectionKey(int fileVal, int rowVal)
         {
-            return (rowVal * 8) + fileVal - 9;
+            return (rowVal * noOfFiles) + fileVal - noOfRows - 1;
         }
 
         public int ToCollectionKey((int, int) posVal)
         {
-            return (posVal.Item2 * 8) + posVal.Item1 - 9;
+            return (posVal.Item2 * noOfFiles) + posVal.Item1 - noOfRows - 1;
         }
 
-        public (int,int) ToPositionKey(int keyVal)
+        //Translates collection key to position
+        public (int,int) ToPosition(int keyVal)
         {
-            return ((keyVal+1) / 8, (keyVal % 8));
+            return ((keyVal+1) / noOfRows, (keyVal % noOfFiles));
         }
     }
 }

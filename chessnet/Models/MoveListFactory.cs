@@ -6,6 +6,53 @@ namespace Chessnet.Models
 {
     public static class MoveListFactory
     {
+
+        public static List<Move> CreateMoveList(PieceType pieceType)
+        {
+            switch(pieceType)
+            {
+                case PieceType.BlackBishop:
+                    return CreateBishopMoveList();
+
+                case PieceType.BlackKing:
+                    return CreateKingMoveList();
+
+                case PieceType.BlackKnight:
+                    return CreateKnightMoveList();
+
+                case PieceType.BlackPawn:
+                    return CreateBlackPawnMoveList();
+
+                case PieceType.BlackQueen:
+                    return CreateQueenMoveList();
+
+                case PieceType.BlackRook:
+                    return CreateRookMoveList();
+
+                case PieceType.WhiteBishop:
+                    return CreateBishopMoveList();
+
+                case PieceType.WhiteKing:
+                    return CreateKingMoveList();
+
+                case PieceType.WhiteKnight:
+                    return CreateKnightMoveList();
+
+                case PieceType.WhitePawn:
+                    return CreateWhitePawnMoveList();
+
+                case PieceType.WhiteQueen:
+                    return CreateQueenMoveList();
+
+                case PieceType.WhiteRook:
+                    return CreateRookMoveList();
+
+                default:
+                    return null;
+            }
+        }
+
+
         public static List<Move> CreateBishopMoveList()
         {
             List<Move> moveset = new List<Move>();

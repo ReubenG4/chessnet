@@ -15,7 +15,7 @@ namespace Chessnet.ViewModels
         ChessBoardMachine machine;
 
         /* Declare board model*/
-        public Board board {get; private set;}
+        public ChessBoard board {get; private set;}
 
         /*Commands*/
         public RelayCommand whitePieceChosenCommand { get; private set; }
@@ -23,6 +23,10 @@ namespace Chessnet.ViewModels
 
         //Used to disable a button from use, never able to execute
         public DisabledCommand disabledCommand { get; private set; }
+
+        /*Button Commands and Styles: Used to bind buttons to*/
+        public ButtonCommandCollection commands { get; private set; }
+        public ButtonStyleCollection styles { get; private set; }
 
         #endregion declarations
 
@@ -34,11 +38,14 @@ namespace Chessnet.ViewModels
             machine = new ChessBoardMachine(this);
 
             //Initialise Board model
-            board = new Board();
+            board = new ChessBoard();
 
-            //Initialise commands for state machine
+            //Initialise button binding collections
+            commands = new ButtonCommandCollection();
+            styles = new ButtonStyleCollection();
+
+            //Initialise commands
             disabledCommand = new DisabledCommand();
-
             whitePieceChosenCommand = machine.CreateCommand(BoardTrigger.WhitePiecePicked);
             whitePieceDroppedCommand = machine.CreateCommand(BoardTrigger.WhitePieceDropped);
 
@@ -78,8 +85,8 @@ namespace Chessnet.ViewModels
                 (int, int) position = pieceEnumerator.Current.getPosition();
 
                 //Change the piece's style and command
-                board.styles[board.ToCollectionKey(position)] = validStyle;
-                board.commands[board.ToCollectionKey(position)] = whitePieceChosenCommand;
+                styles[board.ToCollectionKey(position)] = validStyle;
+                commands[board.ToCollectionKey(position)] = whitePieceChosenCommand;
             }       
         }
 
@@ -98,18 +105,18 @@ namespace Chessnet.ViewModels
                 (int, int) position = pieceEnumerator.Current.getPosition();
 
                 //Change the piece's style and command (Disable the piece from being selected)
-                board.styles[board.ToCollectionKey(position)] = defaultStyle;
-                board.commands[board.ToCollectionKey(position)] = disabledCommand;
+                styles[board.ToCollectionKey(position)] = defaultStyle;
+                commands[board.ToCollectionKey(position)] = disabledCommand;
             }
 
             //Retrieve the piece chosen
             Piece pieceChosen = board.GetPiece(pieceKey);
 
             //Set it to whitePieceDroppedCommand
-            board.commands[pieceKey] = whitePieceDroppedCommand;
+            commands[pieceKey] = whitePieceDroppedCommand;
 
             //Set it to white piece chosen style
-            board.styles[pieceKey] = ChessButtonStyle.Chosen(pieceChosen.pieceType);
+            styles[pieceKey] = ChessButtonStyle.Chosen(pieceChosen.pieceType);
          
         }
         #endregion Actions
@@ -133,15 +140,16 @@ namespace Chessnet.ViewModels
                         //Find its default style
                         Style styleToRender = ChessButtonStyle.Default(pieceToRender.pieceType);
                         //Render it in default style
-                        board.styles[board.ToCollectionKey((x,y))] = styleToRender;
+                        styles[board.ToCollectionKey((x,y))] = styleToRender;
                         //Set command to disabledCommand
-                        board.commands[board.ToCollectionKey((x,y))] = disabledCommand;
+                        commands[board.ToCollectionKey((x,y))] = disabledCommand;
                     }
                     else
                     {
                         //Render it as a default square
-                        board.styles[board.ToCollectionKey((x, y))] = ChessButtonStyle.Default(PieceType.EmptySquare);
-                        board.commands[board.ToCollectionKey((x, y))] = disabledCommand;
+                        styles[board.ToCollectionKey((x, y))] = ChessButtonStyle.Default(PieceType.EmptySquare);
+                        //Set command to disabledCommand
+                        commands[board.ToCollectionKey((x, y))] = disabledCommand;
                     }         
                 }
             }

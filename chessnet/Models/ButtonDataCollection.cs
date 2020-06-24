@@ -25,7 +25,7 @@ namespace Chessnet.Models
         {
             for (int x = 0; x < 64; x++)
             {
-                Add(Application.Current.Resources["DefaultSquare"] as Style);
+                Add(null);
             }
         }
     }
